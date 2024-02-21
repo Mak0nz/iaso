@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "595855593593",
+    "project_id": "heamed-1d38d",
+    "storage_bucket": "heamed-1d38d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595855593593:android:7cab084be8ea5db22a44a8",
+        "android_client_info": {
+          "package_name": "com.benedekszesztai.heamed"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcNFLR-htfEbZ6CWW-5fLQNOh65vCL9aI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
