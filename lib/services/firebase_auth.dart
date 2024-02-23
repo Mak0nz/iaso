@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:heamed/widgets/toast.dart';
 
 class FirebaseAuthService{
 
@@ -8,8 +9,16 @@ class FirebaseAuthService{
     try {
       UserCredential credential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       return credential.user;
-    } catch (e) {
-      print("Some error occured");
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        showToast(message: 'Az e-mail cím már használatban van.');
+      } else if (e.code == 'channel-error') {
+        showToast(message: 'Minden mező szükséges.');
+      } else if (e.code == 'weak-password') {
+        showToast(message: 'Gyenge jelszó.');
+      } else {
+        showToast(message: 'Hiba lépett fel: ${e.code}');
+      }
     }
     return null;
   }
@@ -18,8 +27,14 @@ class FirebaseAuthService{
     try {
       UserCredential credential = await _auth.signInWithEmailAndPassword(email: email, password: password);
       return credential.user;
-    } catch (e) {
-      print("Some error occured");
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-credential') {
+        showToast(message: 'Rossz email cím vagy jelszó.');
+      } else if (e.code == 'channel-error') {
+        showToast(message: 'Minden mező szükséges.');
+      } else {
+        showToast(message: 'Hiba lépett fel: ${e.code}');
+      }
     }
     return null;
   }

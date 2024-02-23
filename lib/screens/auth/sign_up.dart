@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:heamed/screens/auth/log_in.dart';
 import 'package:heamed/services/firebase_auth.dart';
 import 'package:heamed/widgets/form_container_widget.dart';
+import 'package:heamed/widgets/toast.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -118,6 +119,7 @@ class _SignUpPageState extends State<SignUpPage> {
       _isSigningUp = true;
     });
 
+    // ignore: unused_local_variable
     String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
@@ -129,10 +131,10 @@ class _SignUpPageState extends State<SignUpPage> {
     });
 
     if (user != null) {
-      print("User has been successfully created");
+      showToast(message: "A felhasználó létrehozása sikeresen megtörtént");
       Navigator.pushNamed(context, "/home");
     } else {
-      print("Some error happened");
+      showToast(message: "Hiba történt.");
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:heamed/widgets/toast.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -20,6 +21,7 @@ class Home extends StatelessWidget {
             onTap: (){
               FirebaseAuth.instance.signOut();
               Navigator.pushNamed(context, "/login");
+              showToast(message: "Sikeresen kijelentkezve");
             },
           child: Container(
             height: 45,

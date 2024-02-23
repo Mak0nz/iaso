@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:heamed/screens/auth/sign_up.dart';
 import 'package:heamed/services/firebase_auth.dart';
 import 'package:heamed/widgets/form_container_widget.dart';
+import 'package:heamed/widgets/toast.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -120,10 +121,10 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     if (user != null) {
-      print("User has been successfully logged in");
+      showToast(message: "A felhasználó sikeresen bejelentkezve");
       Navigator.pushNamed(context, "/home");
     } else {
-      print("Some error happened");
+      showToast(message: "Hiba történt.");
     }
   }
 }
