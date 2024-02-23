@@ -1,7 +1,9 @@
-// ignore_for_file: use_build_context_synchronously, avoid_print
+// ignore_for_file: use_build_context_synchronously, avoid_print, no_leading_underscores_for_local_identifiers
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:heamed/screens/auth/sign_up.dart';
 import 'package:heamed/services/firebase_auth.dart';
 import 'package:heamed/widgets/form_container_widget.dart';
@@ -19,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _isSigning = false;
 
   final FirebaseAuthService _auth = FirebaseAuthService();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -68,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                   hintText: "jelszó",
                   isPasswordField: true,
                 ),
-                SizedBox(height: 30,),
+                SizedBox(height: 10,),
                 GestureDetector(
                   onTap: _signIn,
                   child: Container(
@@ -82,6 +85,28 @@ class _LoginPageState extends State<LoginPage> {
                       Text("Bejelentkezés", 
                         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                       ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                GestureDetector(
+                  onTap: _signInWithGoogle,
+                  child: Container(
+                    width: double.infinity,
+                    height: 45,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(FontAwesomeIcons.google, color: Colors.white,),
+                        SizedBox(width: 15,),
+                        Text("Bejelentkezés Google fiókkal", 
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -127,4 +152,29 @@ class _LoginPageState extends State<LoginPage> {
       showToast(message: "Hiba történt.");
     }
   }
+
+  _signInWithGoogle () async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+    try {
+      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+
+      if(googleSignInAccount != null ){
+        final GoogleSignInAuthentication googleSignInAuthentication = await
+        googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken,
+        );
+
+        await _firebaseAuth.signInWithCredential(credential);
+        Navigator.pushNamed(context, "/home");
+      }
+
+    } catch (e) {
+      showToast(message: "some error occured $e");
+    }
+  }
+
 }
