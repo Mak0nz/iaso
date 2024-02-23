@@ -15,6 +15,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  bool _isSigning = false;
+
   final FirebaseAuthService _auth = FirebaseAuthService();
 
   TextEditingController _emailController = TextEditingController();
@@ -75,7 +77,11 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center( child: Text("Bejelentkezés", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),),
+                    child: Center( child: _isSigning ? CircularProgressIndicator(color: Colors.white,):
+                      Text("Bejelentkezés", 
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(height: 15),
@@ -99,10 +105,19 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _signIn() async {
+
+    setState(() {
+      _isSigning = true;
+    });
+
     String email = _emailController.text;
     String password = _passwordController.text;
 
     User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    setState(() {
+      _isSigning = false;
+    });
 
     if (user != null) {
       print("User has been successfully logged in");

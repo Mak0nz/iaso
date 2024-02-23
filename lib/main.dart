@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:heamed/screens/auth/sign_in.dart';
+import 'package:heamed/screens/auth/log_in.dart';
 import 'package:heamed/screens/auth/sign_up.dart';
 import 'package:heamed/screens/home/home.dart';
 import 'package:heamed/screens/wrapper.dart';

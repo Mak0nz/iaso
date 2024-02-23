@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:heamed/screens/auth/sign_in.dart';
+import 'package:heamed/screens/auth/log_in.dart';
 import 'package:heamed/services/firebase_auth.dart';
 import 'package:heamed/widgets/form_container_widget.dart';
 
@@ -14,6 +14,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+
+  bool _isSigningUp = false;
 
   final FirebaseAuthService _auth = FirebaseAuthService();
 
@@ -83,7 +85,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center( child: Text("Feliratkozás", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),),
+                    child: Center( child: _isSigningUp ? CircularProgressIndicator(color: Colors.white,):
+                      Text("Feliratkozás", 
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(height: 15),
@@ -107,11 +113,20 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _signUp() async {
+
+    setState(() {
+      _isSigningUp = true;
+    });
+
     String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
 
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
+
+    setState(() {
+      _isSigningUp = false;
+    });
 
     if (user != null) {
       print("User has been successfully created");
