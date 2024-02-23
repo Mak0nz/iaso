@@ -1,10 +1,31 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:heamed/screens/auth/sign_up.dart';
-import 'package:heamed/screens/home/home.dart';
+import 'package:heamed/services/firebase_auth.dart';
 import 'package:heamed/widgets/form_container_widget.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +55,19 @@ class LoginPage extends StatelessWidget {
                 ),),
                 SizedBox(height: 45,),
                 FormContainerWidget(
+                  controller: _emailController,
                   hintText: "email",
                   isPasswordField: false,
                 ),
                 SizedBox(height: 10,),
                 FormContainerWidget(
+                  controller: _passwordController,
                   hintText: "jelszó",
                   isPasswordField: true,
                 ),
                 SizedBox(height: 30,),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Home() ));
-                  },
+                  onTap: _signIn,
                   child: Container(
                     width: double.infinity,
                     height: 45,
@@ -64,7 +85,7 @@ class LoginPage extends StatelessWidget {
                     SizedBox(width: 5,),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage() ));
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => SignUpPage()), (route) => false);
                       },
                       child: Text("Regisztrálj",style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
                     ),
@@ -75,5 +96,19 @@ class LoginPage extends StatelessWidget {
         ),
       ), 
     );
+  }
+
+  void _signIn() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      print("User has been successfully logged in");
+      Navigator.pushNamed(context, "/home");
+    } else {
+      print("Some error happened");
+    }
   }
 }

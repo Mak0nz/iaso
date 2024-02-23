@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:heamed/screens/auth/sign_in.dart';
+import 'package:heamed/screens/auth/sign_up.dart';
+import 'package:heamed/screens/home/home.dart';
 import 'package:heamed/screens/wrapper.dart';
 import 'firebase_options.dart';
 
-void main() async {
-  runApp(const MyApp());
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -24,6 +28,11 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Poppins',
       ),
+      routes: {
+        '/home': (context) => Home(),
+        '/login': (context) => LoginPage(),
+        '/signup': (context) => SignUpPage(),
+      }
     );
   }
 }
