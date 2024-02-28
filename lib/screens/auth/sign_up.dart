@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:heamed/screens/auth/log_in.dart';
@@ -125,6 +126,14 @@ class _SignUpPageState extends State<SignUpPage> {
     String password = _passwordController.text;
 
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
+
+    // add username to db
+    FirebaseFirestore.instance.collection("users")
+      .doc(email)
+      .set({
+        "email": email,
+        "username": username
+      });
 
     setState(() {
       _isSigningUp = false;
