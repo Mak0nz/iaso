@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:heamed/widgets/toast.dart';
+import 'package:iaso/widgets/toast.dart';
 
 class FirebaseAuthService{
 

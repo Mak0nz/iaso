@@ -1,13 +1,15 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print, no_leading_underscores_for_local_identifiers
 
+import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:heamed/screens/auth/sign_up.dart';
-import 'package:heamed/services/firebase_auth.dart';
-import 'package:heamed/widgets/form_container_widget.dart';
-import 'package:heamed/widgets/toast.dart';
+import 'package:iaso/screens/auth/sign_up.dart';
+import 'package:iaso/services/firebase_auth.dart';
+import 'package:iaso/widgets/form_container_widget.dart';
+import 'package:iaso/widgets/toast.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -54,10 +56,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 SizedBox(height: 5,),
-                Text("HEAMED", style: TextStyle(
+                Text("IASO", style: TextStyle(
                   fontSize: 40,
-                  letterSpacing: 5,
-                  fontWeight: FontWeight.w900,
+                  letterSpacing: 4,
+                  fontFamily: 'LilitaOne',
                 ),),
                 SizedBox(height: 45,),
                 FormContainerWidget(

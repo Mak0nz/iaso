@@ -3,10 +3,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:heamed/screens/auth/log_in.dart';
-import 'package:heamed/services/firebase_auth.dart';
-import 'package:heamed/widgets/form_container_widget.dart';
-import 'package:heamed/widgets/toast.dart';
+import 'package:iaso/screens/auth/log_in.dart';
+import 'package:iaso/services/firebase_auth.dart';
+import 'package:iaso/widgets/form_container_widget.dart';
+import 'package:iaso/widgets/toast.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -54,10 +54,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 SizedBox(height: 5,),
-                Text("HEAMED", style: TextStyle(
+                Text("IASO", style: TextStyle(
                   fontSize: 40,
-                  letterSpacing: 5,
-                  fontWeight: FontWeight.w900,
+                  letterSpacing: 4,
+                  fontFamily: 'LilitaOne',
                 ),),
                 SizedBox(height: 45,),
                 FormContainerWidget(

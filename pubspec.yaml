@@ -1,4 +1,4 @@
-name: heamed
+name: iaso
 description: "An app for your medical needs."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -83,6 +83,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+  - family: LilitaOne
+    fonts:
+      - asset: fonts/LilitaOne.ttf
   - family: Poppins
     fonts:
       - asset: fonts/Poppins-100.ttf

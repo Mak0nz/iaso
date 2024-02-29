@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:heamed/screens/auth/log_in.dart';
-import 'package:heamed/screens/home/home.dart';
+import 'package:iaso/screens/auth/log_in.dart';
+import 'package:iaso/screens/home/home.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});

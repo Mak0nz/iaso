@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:heamed/widgets/toast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:iaso/widgets/toast.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -85,7 +86,7 @@ class _HomeState extends State<Home> {
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Icon(Icons.logout, color: Colors.black,),
+              child: Icon(FontAwesomeIcons.rightFromBracket, color: Colors.black,),
             ),
           ),
         ],
@@ -101,61 +102,14 @@ class _HomeState extends State<Home> {
               Text("placeholdere"),
               Image.asset('assets/logo.png'),
               Text("placeholdere"),
-              Text("placeholdere"),
 
               SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-              Text("placeholder"),
-              SizedBox(height: 30,),
-
               Center(child: Text("Welcome Home buddy!",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 19),)),
               SizedBox(height: 30,),
-              GestureDetector(
-                onTap: (){
-                  FirebaseAuth.instance.signOut();
-                  Navigator.pushNamed(context, "/login");
-                  showToast(message: "Sikeresen kijelentkezve");
-                },
-                child: Container(
-                height: 45,
-                width: 200,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(10)
-                ),
-                child: Center(child: Text("Kijelentkezés",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),),),
-              ),)
-
-
+              
+              
             ],
-          )
+          ),
         ),
       ), 
 
