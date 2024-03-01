@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:iaso/screens/auth/log_in.dart';
 import 'package:iaso/screens/auth/sign_up.dart';
-import 'package:iaso/screens/home/home.dart';
+import 'package:iaso/screens/pages/home.dart';
 import 'package:iaso/screens/wrapper.dart';
 import 'firebase_options.dart';
 

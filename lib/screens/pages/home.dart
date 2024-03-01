@@ -107,7 +107,17 @@ class _HomeState extends State<Home> {
               Center(child: Text("Welcome Home buddy!",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 19),)),
               SizedBox(height: 30,),
               
-              
+              Text("placeholdere"),
+              Image.asset('assets/logo.png'),
+              Text("placeholdere"),
+
+              Text("placeholdere"),
+              Image.asset('assets/logo.png'),
+              Text("placeholdere"),
+
+              Text("placeholdere"),
+              Image.asset('assets/logo.png'),
+              Text("placeholdere"),
             ],
           ),
         ),

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iaso/screens/auth/log_in.dart';
-import 'package:iaso/screens/home/home.dart';
+import 'package:iaso/screens/components/navigation_menu.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
@@ -13,7 +13,7 @@ class Wrapper extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, AsyncSnapshot<User?> snapshot) {
         if (snapshot.hasData && snapshot.data != null) {
-          return const Home();
+          return const NavigationMenu();
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator(),
