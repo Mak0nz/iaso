@@ -4,7 +4,6 @@ import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iaso/screens/auth/sign_up.dart';
 import 'package:iaso/services/firebase_auth.dart';
@@ -45,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+              // logo
                 Container( 
                   width: 200,
                   height: 200,
@@ -62,26 +62,29 @@ class _LoginPageState extends State<LoginPage> {
                   fontFamily: 'LilitaOne',
                 ),),
                 SizedBox(height: 45,),
+              // Email form
                 FormContainerWidget(
                   controller: _emailController,
                   hintText: "email",
                   isPasswordField: false,
                 ),
                 SizedBox(height: 10,),
+              // Password form
                 FormContainerWidget(
                   controller: _passwordController,
                   hintText: "jelszó",
                   isPasswordField: true,
                 ),
                 SizedBox(height: 10,),
+              // Login button
                 GestureDetector(
                   onTap: _signIn,
                   child: Container(
                     width: double.infinity,
-                    height: 45,
+                    padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blue.shade400,
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     child: Center( child: _isSigning ? CircularProgressIndicator(color: Colors.white,):
                       Text("Bejelentkezés", 
@@ -90,28 +93,43 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
+              // or continue with
+                Row(
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        thickness: 0.5,
+                        color: Colors.grey.shade500,
+                      )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text('Vagy jelentkezzen be google-al',),
+                    ),
+                    Expanded(
+                      child: Divider(
+                        thickness: 0.5,
+                        color: Colors.grey.shade500,
+                      )
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10,),
+              // login using google
                 GestureDetector(
                   onTap: _signInWithGoogle,
                   child: Container(
-                    width: double.infinity,
-                    height: 45,
+                    padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.black12,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(FontAwesomeIcons.google, color: Colors.white,),
-                        SizedBox(width: 15,),
-                        Text("Bejelentkezés Google fiókkal", 
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                      ],
-                    ),
+                    child: Image.asset('assets/google.png', height: 40,),
                   ),
                 ),
+              // Don't have an account? Register
                 SizedBox(height: 15),
                 Row(mainAxisAlignment: MainAxisAlignment.center,
                   children : [

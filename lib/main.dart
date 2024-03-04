@@ -5,6 +5,7 @@ import 'package:iaso/screens/auth/log_in.dart';
 import 'package:iaso/screens/auth/sign_up.dart';
 import 'package:iaso/screens/pages/home.dart';
 import 'package:iaso/screens/wrapper.dart';
+import 'package:iaso/themes.dart';
 import 'firebase_options.dart';
 
 Future main() async {
@@ -24,10 +25,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Wrapper(),
-      theme: ThemeData(
-        useMaterial3: true,
-        fontFamily: 'Poppins',
-      ),
+      themeMode: ThemeMode.system,
+      theme: ThemeClass.lightTheme,
+      darkTheme: ThemeClass.darkTheme,
       routes: {
         '/home': (context) => Home(),
         '/login': (context) => LoginPage(),

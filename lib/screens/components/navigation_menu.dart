@@ -25,37 +25,32 @@ class _NavigationMenuState extends State<NavigationMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-          decoration: const BoxDecoration(boxShadow: [
-            BoxShadow(
-              color: Colors.black,
-              blurRadius: 15,
-            )
-          ]),
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              topRight: Radius.circular(15),
-            ),
-            child: NavigationBar(
-              backgroundColor: Colors.white.withAlpha(220),
-              indicatorColor: Colors.blue.shade200,
-              elevation: 3,
-              labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-
-              selectedIndex: currentIndex,
-              onDestinationSelected: (index) {
-                setState(() {
-                  currentIndex = index;
-                });
-              },
-              destinations: const [
-                NavigationDestination(icon: Icon(FontAwesomeIcons.house), label: 'főoldal'),
-                NavigationDestination(icon: Icon(FontAwesomeIcons.heartCirclePlus), label: 'mérések'),
-                NavigationDestination(icon: Icon(FontAwesomeIcons.capsules), label: 'gyógyszer'),
-                NavigationDestination(icon: Icon(FontAwesomeIcons.circleInfo), label: 'infó'),
-              ],
-            ),
+        decoration: const BoxDecoration(boxShadow: [
+          BoxShadow(
+            color: Colors.black,
+            blurRadius: 15,
+          )
+        ]),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
           ),
+          child: NavigationBar(
+            selectedIndex: currentIndex,
+            onDestinationSelected: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+            destinations: const [
+              NavigationDestination(icon: Icon(FontAwesomeIcons.house), label: 'főoldal'),
+              NavigationDestination(icon: Icon(FontAwesomeIcons.heartCirclePlus), label: 'mérések'),
+              NavigationDestination(icon: Icon(FontAwesomeIcons.capsules), label: 'gyógyszer'),
+              NavigationDestination(icon: Icon(FontAwesomeIcons.circleInfo), label: 'infó'),
+            ],
+          ),
+        ),
       ),
       body: pages[currentIndex],
     );

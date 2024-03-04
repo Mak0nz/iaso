@@ -65,7 +65,6 @@ class _HomeState extends State<Home> {
             child: Container(color: Colors.transparent,),
           ),
         ),
-        backgroundColor: Colors.white.withAlpha(200),
         automaticallyImplyLeading: false,
         title: 
           Text(greetingText,
@@ -86,7 +85,7 @@ class _HomeState extends State<Home> {
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Icon(FontAwesomeIcons.rightFromBracket, color: Colors.black,),
+              child: Icon(FontAwesomeIcons.rightFromBracket,),
             ),
           ),
         ],
@@ -103,21 +102,14 @@ class _HomeState extends State<Home> {
               Image.asset('assets/logo.png'),
               Text("placeholdere"),
 
+              Text("placeholdere"),
+              Image.asset('assets/logo.png'),
+              Text("placeholdere"),
+              
               SizedBox(height: 30,),
               Center(child: Text("Welcome Home buddy!",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 19),)),
               SizedBox(height: 30,),
-              
-              Text("placeholdere"),
-              Image.asset('assets/logo.png'),
-              Text("placeholdere"),
-
-              Text("placeholdere"),
-              Image.asset('assets/logo.png'),
-              Text("placeholdere"),
-
-              Text("placeholdere"),
-              Image.asset('assets/logo.png'),
-              Text("placeholdere"),
+               
             ],
           ),
         ),

@@ -43,6 +43,7 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+              // logo
                 Container( 
                   width: 200,
                   height: 200,
@@ -60,32 +61,36 @@ class _SignUpPageState extends State<SignUpPage> {
                   fontFamily: 'LilitaOne',
                 ),),
                 SizedBox(height: 45,),
+              // username field
                 FormContainerWidget(
                   controller: _usernameController,
                   hintText: "Felhasználónév",
                   isPasswordField: false,
                 ),
                 SizedBox(height: 10,),
+              // email field
                 FormContainerWidget(
                   controller: _emailController,
                   hintText: "email",
                   isPasswordField: false,
                 ),
                 SizedBox(height: 10,),
+              // password field
                 FormContainerWidget(
                   controller: _passwordController,
                   hintText: "jelszó",
                   isPasswordField: true,
                 ),
                 SizedBox(height: 30,),
+              // signup button
                 GestureDetector(
                   onTap: _signUp,
                   child: Container(
                     width: double.infinity,
-                    height: 45,
+                    padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blue.shade400,
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     child: Center( child: _isSigningUp ? CircularProgressIndicator(color: Colors.white,):
                       Text("Feliratkozás", 
@@ -95,6 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 SizedBox(height: 15),
+              // already have an account? login
                 Row(mainAxisAlignment: MainAxisAlignment.center,
                   children : [
                     Text("Már van fiókod?"),
