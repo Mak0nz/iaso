@@ -32,7 +32,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
           )
         ]),
         child: ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(15),
             topRight: Radius.circular(15),
           ),

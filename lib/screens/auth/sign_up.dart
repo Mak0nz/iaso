@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, use_build_context_synchronously
+// ignore_for_file: avoid_print, use_build_context_synchronously, prefer_final_fields
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -64,7 +64,7 @@ class _SignUpPageState extends State<SignUpPage> {
               // username field
                 FormContainerWidget(
                   controller: _usernameController,
-                  hintText: "Felhasználónév",
+                  hintText: "felhasználónév",
                   isPasswordField: false,
                 ),
                 SizedBox(height: 10,),
@@ -81,7 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   hintText: "jelszó",
                   isPasswordField: true,
                 ),
-                SizedBox(height: 30,),
+                SizedBox(height: 15,),
               // signup button
                 GestureDetector(
                   onTap: _signUp,
@@ -147,7 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     if (user != null) {
       showToast(message: "A felhasználó létrehozása sikeresen megtörtént");
-      Navigator.pushNamed(context, "/home");
+      Navigator.pushNamed(context, "/navigationMenu");
     } else {
       showToast(message: "Hiba történt.");
     }

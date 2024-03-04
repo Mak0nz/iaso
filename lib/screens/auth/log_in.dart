@@ -1,6 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, avoid_print, no_leading_underscores_for_local_identifiers
-
-import 'dart:ui';
+// ignore_for_file: use_build_context_synchronously, avoid_print, no_leading_underscores_for_local_identifiers, prefer_final_fields
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                   hintText: "jelszó",
                   isPasswordField: true,
                 ),
-                SizedBox(height: 10,),
+                SizedBox(height: 15,),
               // Login button
                 GestureDetector(
                   onTap: _signIn,
@@ -93,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 15),
               // or continue with
                 Row(
                   children: [
@@ -115,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                SizedBox(height: 15,),
               // login using google
                 GestureDetector(
                   onTap: _signInWithGoogle,
@@ -167,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
 
     if (user != null) {
       showToast(message: "A felhasználó sikeresen bejelentkezve");
-      Navigator.pushNamed(context, "/home");
+      Navigator.pushNamed(context, "/navigationMenu");
     } else {
       showToast(message: "Hiba történt.");
     }
@@ -189,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        Navigator.pushNamed(context, "/home");
+        Navigator.pushNamed(context, "/navigationMenu");
       }
 
     } catch (e) {

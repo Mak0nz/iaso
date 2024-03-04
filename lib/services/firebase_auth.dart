@@ -3,6 +3,7 @@ import 'package:iaso/widgets/toast.dart';
 
 class FirebaseAuthService{
 
+  // ignore: prefer_final_fields
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<User?> signUpWithEmailAndPassword(String email, String password) async {

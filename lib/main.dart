@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:iaso/screens/auth/log_in.dart';
 import 'package:iaso/screens/auth/sign_up.dart';
+import 'package:iaso/screens/components/navigation_menu.dart';
 import 'package:iaso/screens/pages/home.dart';
 import 'package:iaso/screens/wrapper.dart';
 import 'package:iaso/themes.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeClass.lightTheme,
       darkTheme: ThemeClass.darkTheme,
       routes: {
+        '/navigationMenu': (context) => NavigationMenu(),
         '/home': (context) => Home(),
         '/login': (context) => LoginPage(),
         '/signup': (context) => SignUpPage(),
