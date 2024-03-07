@@ -100,6 +100,7 @@ class _StatsPageState extends State<StatsPage> {
               SizedBox(height: 95,), // No content behind appbar on pageload.
               Text("Reggeli vérnyomás:", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: EdgeInsets.all(4.0), // Adjust padding as needed
@@ -121,7 +122,7 @@ class _StatsPageState extends State<StatsPage> {
                       ),
                     ),
                   ),
-                  const Text("/", style: TextStyle(fontSize: 20),),
+                  const Text("/", style: TextStyle(fontSize: 16),),
                   Padding(
                     padding: EdgeInsets.all(4.0), // Adjust padding as needed
                     child: SizedBox(
@@ -143,7 +144,7 @@ class _StatsPageState extends State<StatsPage> {
                     ),
                   ),
 
-                  const Text("mmHg", style: TextStyle(fontSize: 20),),
+                  const Text("mmHg", style: TextStyle(fontSize: 16),),
                   SizedBox(
                     width: 10.0, // Add horizontal spacing between the fields
                   ),
@@ -168,7 +169,7 @@ class _StatsPageState extends State<StatsPage> {
                       ),
                     ),
                   ),
-                  const Text("bpm", style: TextStyle(fontSize: 20),),
+                  const Text("bpm", style: TextStyle(fontSize: 16),),
 
                 ],
               ), 
@@ -200,7 +201,7 @@ class _StatsPageState extends State<StatsPage> {
                       ),
                     ),
                   ),
-                  const Text("°C", style: TextStyle(fontSize: 20),),
+                  const Text("°C", style: TextStyle(fontSize: 16),),
                 ],
               ),
               
@@ -231,7 +232,7 @@ class _StatsPageState extends State<StatsPage> {
                       ),
                     ),
                   ),
-                  const Text("Kg", style: TextStyle(fontSize: 20),),
+                  const Text("Kg", style: TextStyle(fontSize: 16),),
                 ],
               ),
               
@@ -239,6 +240,7 @@ class _StatsPageState extends State<StatsPage> {
 
               Text("Esti vérnyomás:", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: EdgeInsets.all(4.0), // Adjust padding as needed
@@ -260,7 +262,7 @@ class _StatsPageState extends State<StatsPage> {
                       ),
                     ),
                   ),
-                  const Text("/", style: TextStyle(fontSize: 20),),
+                  const Text("/", style: TextStyle(fontSize: 16),),
                   Padding(
                     padding: EdgeInsets.all(4.0), // Adjust padding as needed
                     child: SizedBox(
@@ -282,7 +284,7 @@ class _StatsPageState extends State<StatsPage> {
                     ),
                   ),
 
-                  const Text("mmHg", style: TextStyle(fontSize: 20),),
+                  const Text("mmHg", style: TextStyle(fontSize: 16),),
                   SizedBox(
                     width: 10.0, // Add horizontal spacing between the fields
                   ),
@@ -307,7 +309,7 @@ class _StatsPageState extends State<StatsPage> {
                       ),
                     ),
                   ),
-                  const Text("bpm", style: TextStyle(fontSize: 20),),
+                  const Text("bpm", style: TextStyle(fontSize: 16),),
 
                 ],
               ),
