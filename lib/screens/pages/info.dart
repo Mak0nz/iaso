@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class InfoPage extends StatelessWidget {
@@ -5,10 +6,33 @@ class InfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("infó"),
-      )
+    return Scaffold(
+            extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(color: Colors.transparent,),
+          ),
+        ),
+        automaticallyImplyLeading: false,
+        title: Text("Infó",
+            style: TextStyle(fontWeight: FontWeight.bold)
+          ),
+        centerTitle: true,
+      ),
+
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 90,), // No content behind appbar on pageload.
+
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

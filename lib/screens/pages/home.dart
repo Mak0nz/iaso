@@ -97,19 +97,7 @@ class _HomeState extends State<Home> {
           child: Column(
             children: [
               SizedBox(height: 90,), // No content behind appbar on pageload.
-
-              Text("placeholdere"),
-              Image.asset('assets/logo.png'),
-              Text("placeholdere"),
-
-              Text("placeholdere"),
-              Image.asset('assets/logo.png'),
-              Text("placeholdere"),
               
-              SizedBox(height: 30,),
-              Center(child: Text("Welcome Home buddy!",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 19),)),
-              SizedBox(height: 30,),
-               
             ],
           ),
         ),
