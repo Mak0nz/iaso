@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:iaso/widgets/input_text_form_widget.dart';
 import 'package:iaso/widgets/toast.dart';
 
 class StatsPage extends StatefulWidget {
@@ -102,75 +103,27 @@ class _StatsPageState extends State<StatsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(4.0), // Adjust padding as needed
-                    child: SizedBox(
-                      width: 60.0, // Set a fixed width for better layout control
-                      child: TextFormField(
-                        controller: controllerBpMorningSYS,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0,),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(15.0,),
-                          ),
-                          labelText: 'SYS',
-                        ),
-                      ),
-                    ),
+                  InputTextFormWidget(
+                    width: 60.0,
+                    controller: controllerBpMorningSYS,
+                    labelText: 'SYS',
                   ),
                   const Text("/", style: TextStyle(fontSize: 16),),
-                  Padding(
-                    padding: EdgeInsets.all(4.0), // Adjust padding as needed
-                    child: SizedBox(
-                      width: 60.0, // Set a fixed width for better layout control
-                      child: TextFormField(
-                        controller: controllerBpMorningDIA,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(15.0,),
-                          ),
-                          labelText: 'DIA',
-                        ),
-                      ),
-                    ),
+                  InputTextFormWidget(
+                    width: 60.0,
+                    controller: controllerBpMorningDIA,
+                    labelText: 'DIA',
                   ),
-
                   const Text("mmHg", style: TextStyle(fontSize: 16),),
                   SizedBox(
                     width: 10.0, // Add horizontal spacing between the fields
                   ),
-
-                  Padding(
-                    padding: EdgeInsets.all(4.0), // Adjust padding as needed
-                    child: SizedBox(
-                      width: 80.0, // Set a fixed width for better layout control
-                      child: TextFormField(
-                        controller: controllerBpMorningPulse,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(15.0,),
-                          ),
-                          labelText: 'Pulzus',
-                        ),
-                      ),
-                    ),
+                  InputTextFormWidget(
+                    width: 80.0,
+                    controller: controllerBpMorningPulse,
+                    labelText: 'Pulzus',
                   ),
                   const Text("bpm", style: TextStyle(fontSize: 16),),
-
                 ],
               ), 
               
@@ -180,26 +133,10 @@ class _StatsPageState extends State<StatsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Hőmérséklet:   ", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
-
-                  Padding(
-                    padding: EdgeInsets.all(4.0), // Adjust padding as needed
-                    child: SizedBox(
-                      width: 80.0, // Set a fixed width for better layout control
-                      child: TextFormField(
-                        controller: controllerTemp,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(15.0,),
-                          ),
-                          labelText: '00.0',
-                        ),
-                      ),
-                    ),
+                  InputTextFormWidget(
+                    width: 80.0,
+                    controller: controllerTemp,
+                    labelText: '00.0',
                   ),
                   const Text("°C", style: TextStyle(fontSize: 16),),
                 ],
@@ -211,26 +148,10 @@ class _StatsPageState extends State<StatsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Súly:   ", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
-
-                  Padding(
-                    padding: EdgeInsets.all(4.0), // Adjust padding as needed
-                    child: SizedBox(
-                      width: 80.0, // Set a fixed width for better layout control
-                      child: TextFormField(
-                        controller: controllerWeight,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(15.0,),
-                          ),
-                          labelText: '00.0',
-                        ),
-                      ),
-                    ),
+                  InputTextFormWidget(
+                    width: 80.0,
+                    controller: controllerWeight,
+                    labelText: '00.0',
                   ),
                   const Text("Kg", style: TextStyle(fontSize: 16),),
                 ],
@@ -242,75 +163,27 @@ class _StatsPageState extends State<StatsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(4.0), // Adjust padding as needed
-                    child: SizedBox(
-                      width: 60.0, // Set a fixed width for better layout control
-                      child: TextFormField(
-                        controller: controllerBpNightSYS,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0,),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(15.0,),
-                          ),
-                          labelText: 'SYS',
-                        ),
-                      ),
-                    ),
+                  InputTextFormWidget(
+                    width: 60.0,
+                    controller: controllerBpNightSYS,
+                    labelText: 'SYS',
                   ),
                   const Text("/", style: TextStyle(fontSize: 16),),
-                  Padding(
-                    padding: EdgeInsets.all(4.0), // Adjust padding as needed
-                    child: SizedBox(
-                      width: 60.0, // Set a fixed width for better layout control
-                      child: TextFormField(
-                        controller: controllerBpNightDIA,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(15.0,),
-                          ),
-                          labelText: 'DIA',
-                        ),
-                      ),
-                    ),
+                  InputTextFormWidget(
+                    width: 60.0,
+                    controller: controllerBpNightDIA,
+                    labelText: 'DIA',
                   ),
-
                   const Text("mmHg", style: TextStyle(fontSize: 16),),
                   SizedBox(
                     width: 10.0, // Add horizontal spacing between the fields
                   ),
-
-                  Padding(
-                    padding: EdgeInsets.all(4.0), // Adjust padding as needed
-                    child: SizedBox(
-                      width: 80.0, // Set a fixed width for better layout control
-                      child: TextFormField(
-                        controller: controllerBpNightPulse,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(15.0,),
-                          ),
-                          labelText: 'Pulzus',
-                        ),
-                      ),
-                    ),
+                  InputTextFormWidget(
+                    width: 80.0,
+                    controller: controllerBpNightPulse,
+                    labelText: 'Pulse',
                   ),
                   const Text("bpm", style: TextStyle(fontSize: 16),),
-
                 ],
               ),
               SizedBox(height: 22,),

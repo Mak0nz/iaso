@@ -42,7 +42,7 @@ dependencies:
   fluttertoast: ^8.2.4
   font_awesome_flutter: ^10.7.0
   google_sign_in: ^6.2.1
-  typewritertext: ^3.0.2
+  smooth_sheets: ^0.3.4
 
 dev_dependencies:
   flutter_test:
