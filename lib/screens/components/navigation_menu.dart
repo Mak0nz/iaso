@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iaso/screens/pages/home.dart';
 import 'package:iaso/screens/pages/info.dart';
 import 'package:iaso/screens/pages/meds.dart';
-import 'package:iaso/screens/pages/stats.dart';
+import 'package:iaso/screens/pages/stats/stats.dart';
 
 class NavigationMenu extends StatefulWidget {
   const NavigationMenu({super.key});
