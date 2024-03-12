@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:iaso/screens/pages/meds/create_new_med_modal.dart';
 
 class MedsPage extends StatelessWidget {
   const MedsPage({super.key});
@@ -17,18 +18,20 @@ class MedsPage extends StatelessWidget {
           ),
         ),
         automaticallyImplyLeading: false,
-        title: Text("Gyógyszer",
+        title: Text("Gyógyszerek",
             style: TextStyle(fontWeight: FontWeight.bold)
           ),
         centerTitle: true,
       ),
+
+      floatingActionButton: CreateNewMedModal(),
 
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 90,), // No content behind appbar on pageload.
+              SizedBox(height: 95,), // No content behind appbar on pageload.
 
             ],
           ),
