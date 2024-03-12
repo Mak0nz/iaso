@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:iaso/widgets/checkbox_widget.dart';
 import 'package:iaso/widgets/input_med_form_widget.dart';
 import 'package:iaso/widgets/toast.dart';
 
@@ -102,50 +103,47 @@ class _CreateNewMedModalState extends State<CreateNewMedModal> {
                               ),
                             ),
 
-                            Padding(
-                              padding: EdgeInsets.only(left: 10), // Adjust padding as needed
-                              child: Row(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text("  Hétfő",
-                                      style: TextStyle(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.normal
-                                      ),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ),
-                                  CheckboxWidget(
-                                    initialValue: controllerTakeMonday,
-                                    onChanged: (newValue) => setState(() => controllerTakeMonday = newValue),
-                                  ),
-                                ]
-                              ),
-                            ),
-                            
-                            Padding(
-                              padding: EdgeInsets.only(left: 10), // Adjust padding as needed
-                              child: Row(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text("  Kedd",
-                                      style: TextStyle(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.normal
-                                      ),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ),
-                                  CheckboxWidget(
-                                    initialValue: controllerTakeTuesday,
-                                    onChanged: (newValue) => setState(() => controllerTakeTuesday = newValue),
-                                  ),
-                                ]
-                              ),
+                            CheckboxWidget(
+                              label: "Hétfő",
+                              initialValue: controllerTakeMonday,
+                              onChanged: (newValue) => setState(() => controllerTakeMonday = newValue),
                             ),
 
+                            CheckboxWidget(
+                              label: "Kedd",
+                              initialValue: controllerTakeTuesday,
+                              onChanged: (newValue) => setState(() => controllerTakeTuesday = newValue),
+                            ),
+
+                            CheckboxWidget(
+                              label: "Szerda",
+                              initialValue: controllerTakeWednesday,
+                              onChanged: (newValue) => setState(() => controllerTakeWednesday = newValue),
+                            ),
+
+                            CheckboxWidget(
+                              label: "Csütörtök",
+                              initialValue: controllerTakeThursday,
+                              onChanged: (newValue) => setState(() => controllerTakeThursday = newValue),
+                            ),
+
+                            CheckboxWidget(
+                              label: "Péntek",
+                              initialValue: controllerTakeFriday,
+                              onChanged: (newValue) => setState(() => controllerTakeFriday = newValue),
+                            ),
+
+                            CheckboxWidget(
+                              label: "Szombat",
+                              initialValue: controllerTakeSaturday,
+                              onChanged: (newValue) => setState(() => controllerTakeSaturday = newValue),
+                            ),
+
+                            CheckboxWidget(
+                              label: "Vasárnap",
+                              initialValue: controllerTakeSunday,
+                              onChanged: (newValue) => setState(() => controllerTakeSunday = newValue),
+                            ),
                           ],
                         ),
                       ),
@@ -161,7 +159,11 @@ class _CreateNewMedModalState extends State<CreateNewMedModal> {
                         controller: controllerOrderedBy,
                       ),
 
-
+                      CheckboxWidget(
+                        label: "Van a felhőben",
+                        initialValue: controllerIsInCloud,
+                        onChanged: (newValue) => setState(() => controllerIsInCloud = newValue),
+                      ),
 
                       SizedBox(height: 16,),
                       GestureDetector(
@@ -288,46 +290,4 @@ class Info {
     'orderedBy': orderedBy,
     'isInCloud': isInCloud,
   };
-}
-
-
-// Separate StatefulWidget for the checkbox
-class CheckboxWidget extends StatefulWidget {
-  final bool initialValue;
-  final ValueChanged<bool> onChanged;
-
-  // ignore: use_super_parameters
-  const CheckboxWidget({
-    Key? key,
-    required this.initialValue,
-    required this.onChanged,
-  }) : super(key: key);
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _CheckboxWidgetState createState() => _CheckboxWidgetState();
-}
-
-class _CheckboxWidgetState extends State<CheckboxWidget> {
-  bool _value = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _value = widget.initialValue;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Checkbox.adaptive(
-      value: _value,
-      shape: OvalBorder(),
-      onChanged: (newValue) {
-        setState(() {
-          _value = newValue!;
-          widget.onChanged(newValue);
-        });
-      },
-    );
-  }
 }
