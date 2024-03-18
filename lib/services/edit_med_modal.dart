@@ -96,7 +96,7 @@ class _EditMedModalState extends State<EditMedModal> {
                       AppBar(
                         backgroundColor: Colors.transparent,
                         centerTitle: true,
-                        title: Text("Új gyógyszer",
+                        title: Text("Gyógyszer",
                           style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)
                         ),
                       ),
@@ -237,7 +237,7 @@ class _EditMedModalState extends State<EditMedModal> {
                           ),
                           child: Center(
                             child: Center( child: _isSaving ? CircularProgressIndicator(color: Colors.white,):
-                              Text("Új gyógyszer mentése", 
+                              Text("Gyógyszer mentése", 
                                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                               ),
                             ),  
