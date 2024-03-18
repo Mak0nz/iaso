@@ -8,14 +8,20 @@ import 'package:iaso/widgets/checkbox_widget.dart';
 import 'package:iaso/widgets/input_med_form_widget.dart';
 import 'package:iaso/widgets/toast.dart';
 
-class CreateNewMedModal extends StatefulWidget {
-  const CreateNewMedModal({super.key});
+class EditMedModal extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
+  final medication;
+
+  const EditMedModal({
+    super.key,
+    this.medication,
+  });
 
   @override
-  State<CreateNewMedModal> createState() => _CreateNewMedModalState();
+  State<EditMedModal> createState() => _EditMedModalState();
 }
 
-class _CreateNewMedModalState extends State<CreateNewMedModal> {
+class _EditMedModalState extends State<EditMedModal> {
   bool _isSaving = false;
 
   final controllerName = TextEditingController();
@@ -35,9 +41,43 @@ class _CreateNewMedModalState extends State<CreateNewMedModal> {
   bool controllerIsInCloud = false;
 
   @override
+  void initState() {
+    super.initState();
+    fetchExistingStats();
+  }
+
+  Future fetchExistingStats() async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    final docRef = FirebaseFirestore.instance
+      .collection('users').doc(user?.email)
+        .collection('MedsForUser').doc(widget.medication);
+
+    final docSnapshot = await docRef.get();
+    if (docSnapshot.exists) {
+      final data = docSnapshot.data();
+        controllerName.text = data!['name'].toString();
+        controllerActiveAgent.text = data['activeAgent'].toString();
+        controllerUseCase.text = data['useCase'].toString();
+        controllerSideEffect.text = data['sideEffect'].toString();
+        controllerTakeQuantityPerDay.text = data['currentQuantity'].toString();
+        controllerTakeMonday = data['takeMonday'];
+        controllerTakeTuesday = data['takeTuesday'];
+        controllerTakeWednesday = data['takeWednesday'];
+        controllerTakeThursday = data['takeThursday'];
+        controllerTakeFriday = data['takeFriday'];
+        controllerTakeSaturday = data['takeSaturday'];
+        controllerTakeSunday = data['takeSunday'];
+        controllerCurrentQuantity.text = data['currentQuantity'].toString();
+        controllerOrderedBy.text = data['orderedBy'].toString();
+        controllerIsInCloud = data['isInCloud'];
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () => showModalBottomSheet(
+    return GestureDetector(
+      onTap: () => showModalBottomSheet(
         context: context,
         enableDrag: true,
         isScrollControlled: true,
@@ -185,7 +225,7 @@ class _CreateNewMedModalState extends State<CreateNewMedModal> {
                             orderedBy: controllerOrderedBy.text,
                             isInCloud: controllerIsInCloud,
                           );
-                          createNewMed(info);
+                          editMed(info);
                           Navigator.pop(context); // close modal
                         },
                         child: Container(
@@ -213,22 +253,20 @@ class _CreateNewMedModalState extends State<CreateNewMedModal> {
           )
         ),
       ),
-      child: const Icon(FontAwesomeIcons.plus),
+      child: const Icon(FontAwesomeIcons.penToSquare),
     );
   }
 
-  Future createNewMed(Info info) async{
+  Future editMed(Info info) async{
     setState(() {
       _isSaving = true;  
     });
 
     final user = FirebaseAuth.instance.currentUser;
 
-    final docRef = FirebaseFirestore.instance.collection('users').doc(user?.email);
-    final subcollectiondocumentRef = docRef.collection('MedsForUser').doc();
-
-    final json = info.toJson();
-    await subcollectiondocumentRef.set(json);
+    final docRef = FirebaseFirestore.instance.collection('users').doc(user?.email)
+        .collection('MedsForUser').doc(widget.medication);
+    await docRef.update(info.toJson());
 
     setState(() {
       _isSaving = false;  

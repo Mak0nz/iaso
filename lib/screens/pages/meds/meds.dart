@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:iaso/screens/pages/meds/create_new_med_modal.dart';
+import 'package:iaso/services/display_meds.dart';
 
 class MedsPage extends StatelessWidget {
   const MedsPage({super.key});
@@ -28,13 +29,10 @@ class MedsPage extends StatelessWidget {
 
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 95,), // No content behind appbar on pageload.
-
-            ],
-          ),
+        child: Column(
+          children: [
+            DisplayMeds(),
+          ],
         ),
       ),
     );
