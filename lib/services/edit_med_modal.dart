@@ -60,7 +60,7 @@ class _EditMedModalState extends State<EditMedModal> {
         controllerActiveAgent.text = data['activeAgent'].toString();
         controllerUseCase.text = data['useCase'].toString();
         controllerSideEffect.text = data['sideEffect'].toString();
-        controllerTakeQuantityPerDay.text = data['currentQuantity'].toString();
+        controllerTakeQuantityPerDay.text = data['takeQuantityPerDay'].toString();
         controllerTakeMonday = data['takeMonday'];
         controllerTakeTuesday = data['takeTuesday'];
         controllerTakeWednesday = data['takeWednesday'];
