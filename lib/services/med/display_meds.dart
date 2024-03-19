@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iaso/services/edit_med_modal.dart';
+import 'package:iaso/services/med/edit_med_modal.dart';
 
 class DisplayMeds extends StatefulWidget {
 
@@ -15,7 +15,7 @@ class DisplayMeds extends StatefulWidget {
 }
 
 class _DisplayMedsState extends State<DisplayMeds> {
-   List<DocumentSnapshot> _medications = [];
+  List<DocumentSnapshot> _medications = [];
   String? _currentUserEmail;
 
   @override

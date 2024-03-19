@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:iaso/screens/pages/meds/create_new_med_modal.dart';
-import 'package:iaso/services/display_meds.dart';
+import 'package:iaso/services/med/display_meds.dart';
 
 class MedsPage extends StatelessWidget {
   const MedsPage({super.key});

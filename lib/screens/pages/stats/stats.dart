@@ -34,12 +34,15 @@ class _StatsPageState extends State<StatsPage> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 95,), // No content behind appbar on pageload.
-
-
-            ],
+          child: Padding(
+            padding: const EdgeInsets.only(top:95 ,bottom: 80), // No content behind appbar & floatingActionButton.
+            child: Column(
+              children: [
+                
+                
+                
+              ],
+            ),
           ),
         ),
       ),
