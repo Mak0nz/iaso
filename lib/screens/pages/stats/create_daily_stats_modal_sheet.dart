@@ -208,7 +208,6 @@ class _CreateDailyStatsModalSheetState extends State<CreateDailyStatsModalSheet>
                             bpNightPulse: int.tryParse(controllerBpNightPulse.text) ?? 0,
                           );
                           createStatsForUser(stats);
-                          Navigator.pop(context); // close modal
                         },
                         child: Container(
                           width: double.infinity,
@@ -257,6 +256,8 @@ class _CreateDailyStatsModalSheetState extends State<CreateDailyStatsModalSheet>
       _isSaving = false;  
     });
     showToast(message: "Elmentve");
+    // ignore: use_build_context_synchronously
+    Navigator.pop(context); // close modal
   }
   
 }

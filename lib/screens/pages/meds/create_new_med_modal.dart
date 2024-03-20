@@ -195,7 +195,6 @@ class _CreateNewMedModalState extends State<CreateNewMedModal> {
                             lastUpdatedDate: lastUpdatedDate,
                           );
                           createNewMed(info);
-                          Navigator.pop(context); // close modal
                         },
                         child: Container(
                           width: double.infinity,
@@ -243,6 +242,8 @@ class _CreateNewMedModalState extends State<CreateNewMedModal> {
       _isSaving = false;  
     });
     showToast(message: "Elmentve");
+    // ignore: use_build_context_synchronously
+    Navigator.pop(context); // close modal
   }
 
 }
@@ -264,7 +265,6 @@ class Info {
   String orderedBy;
   bool isInCloud;
   int totalDoses;
-  // ignore: prefer_typing_uninitialized_variables
   var lastUpdatedDate;
 
   Info ({

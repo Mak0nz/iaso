@@ -226,7 +226,6 @@ class _EditMedModalState extends State<EditMedModal> {
                             isInCloud: controllerIsInCloud,
                           );
                           editMed(info);
-                          Navigator.pop(context); // close modal
                         },
                         child: Container(
                           width: double.infinity,
@@ -287,6 +286,8 @@ class _EditMedModalState extends State<EditMedModal> {
       _isSaving = false;  
     });
     showToast(message: "Elmentve");
+    // ignore: use_build_context_synchronously
+    Navigator.pop(context); // close modal
   }
 
 }
