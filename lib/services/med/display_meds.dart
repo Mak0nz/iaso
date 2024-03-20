@@ -62,9 +62,18 @@ class _DisplayMedsState extends State<DisplayMeds> {
             children: _medications.map((medication) {
               final data = medication.data();
               String name = (data as Map<String, dynamic>)['name'] ?? 'No name';
-              
-              //TODO: create outline orange if totalDoses <=14, red if <=7  
+              final totalDoses = data['totalDoses'] as int;
+
+              // Calculate border color based on totalDoses
+              final borderColor = totalDoses <= 7
+                ? Colors.red
+                : totalDoses <= 14 ? Colors.orange : Colors.grey.shade900;
+
               return Card(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: borderColor, width: 2.0),
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: ListTile(
                   leading: data['isInCloud'] ? Icon(FontAwesomeIcons.cloud) : null,
                   title: Text(name, style: TextStyle(fontWeight: FontWeight.bold),),
