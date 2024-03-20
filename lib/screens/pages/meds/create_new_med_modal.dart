@@ -168,6 +168,13 @@ class _CreateNewMedModalState extends State<CreateNewMedModal> {
                       SizedBox(height: 16,),
                       GestureDetector(
                         onTap: () {
+                          final totalDoses = int.parse(controllerCurrentQuantity.text) ~/ int.parse(controllerTakeQuantityPerDay.text);
+                          // Ensure lastDays is not negative
+                          final updatedTotalDoses = totalDoses > 0 ? totalDoses : 0;
+
+                          // update date to be today
+                          final lastUpdatedDate = DateTime.now();
+
                           final info = Info(
                             name: controllerName.text,
                             activeAgent: controllerActiveAgent.text,
@@ -184,6 +191,8 @@ class _CreateNewMedModalState extends State<CreateNewMedModal> {
                             currentQuantity: int.parse(controllerCurrentQuantity.text),
                             orderedBy: controllerOrderedBy.text,
                             isInCloud: controllerIsInCloud,
+                            totalDoses: updatedTotalDoses,
+                            lastUpdatedDate: lastUpdatedDate,
                           );
                           createNewMed(info);
                           Navigator.pop(context); // close modal
@@ -254,6 +263,9 @@ class Info {
   int currentQuantity;
   String orderedBy;
   bool isInCloud;
+  int totalDoses;
+  // ignore: prefer_typing_uninitialized_variables
+  var lastUpdatedDate;
 
   Info ({
     this.name = 'null',
@@ -271,6 +283,8 @@ class Info {
     this.currentQuantity = 0,
     this.orderedBy = 'null',
     this.isInCloud = false,
+    this.totalDoses = 0,
+    this.lastUpdatedDate = '',
   });
 
   Map<String, dynamic> toJson() => {
@@ -289,5 +303,7 @@ class Info {
     'currentQuantity': currentQuantity,
     'orderedBy': orderedBy,
     'isInCloud': isInCloud,
+    'totalDoses': totalDoses,
+    'lastUpdatedDate': lastUpdatedDate,
   };
 }

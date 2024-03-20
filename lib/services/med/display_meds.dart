@@ -62,12 +62,13 @@ class _DisplayMedsState extends State<DisplayMeds> {
             children: _medications.map((medication) {
               final data = medication.data();
               String name = (data as Map<String, dynamic>)['name'] ?? 'No name';
-                
+              
+              //TODO: create outline orange if totalDoses <=14, red if <=7  
               return Card(
                 child: ListTile(
                   leading: data['isInCloud'] ? Icon(FontAwesomeIcons.cloud) : null,
                   title: Text(name, style: TextStyle(fontWeight: FontWeight.bold),),
-                  subtitle: Text('${data['currentQuantity']} darab van.'),
+                  subtitle: Text('${data['totalDoses']} napnyi van.'),
                   trailing: medication.exists ? EditMedModal(medication: medication.id,) : null,
                 ),
               );

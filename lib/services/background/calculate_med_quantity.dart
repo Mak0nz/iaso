@@ -1,45 +1,52 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-class CalculateMedQuantity {
-  List<DocumentSnapshot> _medications = [];
-  String? _currentUserEmail;
+List<DocumentSnapshot> _medications = [];
+String? _currentUserEmail;
 
-  Future<void> _fetchData() async {
-    // Retrieve the current user's email
-    _currentUserEmail = FirebaseAuth.instance.currentUser?.email;
+Future<void> _fetchData() async {
+  // Retrieve the current user's email
+  _currentUserEmail = FirebaseAuth.instance.currentUser?.email;
 
-    if (_currentUserEmail != null) {
-      try {
-        // Get a reference to the MedsForUser subcollection for the current user
-        final medsCollectionRef = FirebaseFirestore.instance
-            .collection('users')
-            .doc(_currentUserEmail)
-            .collection('MedsForUser');
+  if (_currentUserEmail != null) {
+    try {
+      // Get a reference to the MedsForUser subcollection for the current user
+      final medsCollectionRef = FirebaseFirestore.instance
+          .collection('users')
+          .doc(_currentUserEmail)
+          .collection('MedsForUser');
 
-        // Query the subcollection, order by a specific field (e.g., 'name')
-        final querySnapshot = await medsCollectionRef.orderBy('name').get();
+      // Query the subcollection, order by a specific field (e.g., 'name')
+      final querySnapshot = await medsCollectionRef.orderBy('name').get();
 
-        // Update state with the retrieved medications
-        _medications = querySnapshot.docs;
+      // Update state with the retrieved medications
+      _medications = querySnapshot.docs;
 
-      } on FirebaseException catch (e) {
-        // Handle errors (e.g., display an error message)
-        if (kDebugMode) {
-          print("Error fetching medications: ${e.message}");
-        }
+    } on FirebaseException catch (e) {
+      // Handle errors (e.g., display an error message)
+      if (kDebugMode) {
+        print("Error fetching medications: ${e.message}");
       }
-    } else {
-      // Handle no logged-in user
     }
+  } else {
+    // Handle no logged-in user
   }
+}
 
-  Future<void> _updateCurrentQuantities() async {
-    if (_currentUserEmail != null) {
-      try {
-        for (final medication in _medications) {
+Future<void> _updateCurrentQuantities() async {
+  if (_currentUserEmail != null) {
+    try {
+      for (final medication in _medications) {
+        var lastUpdatedDate = medication['lastUpdatedDate'] as DateTime;
+        final today = DateTime.now();
+
+        // Check if today is the same day as the last update
+        final isTodaySameDay = lastUpdatedDate.day == today.day &&
+            lastUpdatedDate.month == today.month &&
+            lastUpdatedDate.year == today.year;
+        
+        if (!isTodaySameDay) {
           // Access the currentQuantity and takeQuantityPerDay from the medication document
           final currentQuantity = medication['currentQuantity'] as int;
           final takeQuantityPerDay = medication['takeQuantityPerDay'] as int;
@@ -50,8 +57,8 @@ class CalculateMedQuantity {
           final takeFriday = medication['takeFriday'] as bool;
           final takeSaturday = medication['takeSaturday'] as bool;
           final takeSunday = medication['takeSunday'] as bool;
+          final totalDoses = medication['totalDoses'] as int;
 
-          final today = DateTime.now();
           bool isTodayMonday() { return today.weekday == DateTime.monday;}
           bool isTodayTuesday() { return today.weekday == DateTime.tuesday;}
           bool isTodayWednesday() { return today.weekday == DateTime.wednesday;}
@@ -70,9 +77,11 @@ class CalculateMedQuantity {
             final totalDoses = updatedQuantity ~/ takeQuantityPerDay;
             // Ensure lastDays is not negative
             final updatedTotalDoses = totalDoses > 0 ? totalDoses : 0;
-
+            // update date to be today
+            lastUpdatedDate = today;
+            
             // Return a Map containing the updated values
-            return {'currentQuantity': updatedQuantity, 'totalDoses': updatedTotalDoses};
+            return {'currentQuantity': updatedQuantity, 'totalDoses': updatedTotalDoses, 'lastUpdatedDate': lastUpdatedDate};
           }
           
           Map<String, dynamic>? updatedValues;
@@ -102,21 +111,27 @@ class CalculateMedQuantity {
                 .doc(medication.id)
                 .update(updatedValues);
           }
+          
+          if (totalDoses <= 14) {
+            //TODO: create a notification
+            
+          }
+
         }
-      } on FirebaseException catch (e) {
-        // Handle errors (e.g., display an error message)
-        if (kDebugMode) {
-          print("Error updating quantities: ${e.message}");
-        }
+
       }
-    } else {
-      // Handle no logged-in user
+    } on FirebaseException catch (e) {
+      // Handle errors (e.g., display an error message)
+      if (kDebugMode) {
+        print("Error updating quantities: ${e.message}");
+      }
     }
+  } else {
+    // Handle no logged-in user
   }
+}
 
-  void initState(){
-    _fetchData();
-    _updateCurrentQuantities();
-  }
-
+Future<void> calculateMedQuantities() async {
+  await _fetchData();
+  await _updateCurrentQuantities();
 }

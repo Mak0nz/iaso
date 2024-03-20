@@ -268,6 +268,21 @@ class _EditMedModalState extends State<EditMedModal> {
         .collection('MedsForUser').doc(widget.medication);
     await docRef.update(info.toJson());
 
+    // Calculate the estimated last days ignoring non-take days
+    final docSnapshot = await docRef.get();
+    final data = docSnapshot.data();
+    final currentQuantity = data!['currentQuantity'];
+    final takeQuantityPerDay = data['takeQuantityPerDay'];
+
+    final totalDoses = currentQuantity ~/ takeQuantityPerDay;
+    // Ensure lastDays is not negative
+    final updatedTotalDoses = totalDoses > 0 ? totalDoses : 0;
+
+    // update date to be today
+    final lastUpdatedDate = DateTime.now();
+
+    await docRef.update({'totalDoses': updatedTotalDoses, 'lastUpdatedDate': lastUpdatedDate});
+
     setState(() {
       _isSaving = false;  
     });
