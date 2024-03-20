@@ -265,6 +265,7 @@ class Info {
   String orderedBy;
   bool isInCloud;
   int totalDoses;
+  // ignore: prefer_typing_uninitialized_variables
   var lastUpdatedDate;
 
   Info ({

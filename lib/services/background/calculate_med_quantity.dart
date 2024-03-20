@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -79,7 +80,7 @@ Future<void> _updateCurrentQuantities() async {
             final updatedTotalDoses = totalDoses > 0 ? totalDoses : 0;
             // update date to be today
             lastUpdatedDate = today;
-            
+
             // Return a Map containing the updated values
             return {'currentQuantity': updatedQuantity, 'totalDoses': updatedTotalDoses, 'lastUpdatedDate': lastUpdatedDate};
           }
@@ -113,8 +114,14 @@ Future<void> _updateCurrentQuantities() async {
           }
           
           if (totalDoses <= 14) {
-            //TODO: create a notification
-            
+            AwesomeNotifications().createNotification(
+              content: NotificationContent(
+                id: 10,
+                channelKey: 'gyogyszer_ertesitesek',
+                title: '${medication['name']} fogyóban van!',
+                body: 'Már csak ${medication['totalDoses']} napnyi van.'
+              )
+            );
           }
 
         }

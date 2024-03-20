@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iaso/screens/pages/home.dart';
@@ -20,6 +21,16 @@ class _NavigationMenuState extends State<NavigationMenu> {
     MedsPage(),
     InfoPage(),
   ];
+
+  @override
+  void initState() {
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

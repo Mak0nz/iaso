@@ -43,6 +43,8 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   google_sign_in: ^6.2.1
   workmanager: ^0.5.2
+  awesome_notifications_core: ^0.9.3
+  awesome_notifications: any
 
 dev_dependencies:
   flutter_test:
