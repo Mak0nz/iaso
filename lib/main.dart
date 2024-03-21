@@ -18,7 +18,19 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  AwesomeNotifications().initialize(
+  await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
+  await Workmanager().registerPeriodicTask(
+    "calculate_med_quantity",
+    "CalculateMedQuantity",
+    // initialDelay: Duration(seconds: 5),
+    frequency: Duration(hours: 6),
+    inputData: <String, dynamic>{},
+    constraints: Constraints(
+      networkType: NetworkType.connected,
+      //requiresDeviceIdle: true,
+    ),
+  );
+    AwesomeNotifications().initialize(
     null,
     [
       NotificationChannel(
@@ -28,18 +40,6 @@ Future main() async {
       )
     ],
     debug: true,
-  );
-  await Workmanager().initialize(callbackDispatcher, isInDebugMode: false);
-  await Workmanager().registerPeriodicTask(
-    "calculate_med_quantity",
-    "CalculateMedQuantity",
-    //initialDelay: Duration(seconds: 5),
-    frequency: Duration(hours: 6),
-    inputData: <String, dynamic>{},
-    constraints: Constraints(
-      networkType: NetworkType.connected,
-      //requiresDeviceIdle: true,
-    ),
   );
   runApp(MyApp());
 }

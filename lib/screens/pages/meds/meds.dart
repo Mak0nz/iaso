@@ -10,7 +10,7 @@ class MedsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         flexibleSpace: ClipRect(
           child: BackdropFilter(

@@ -39,13 +39,20 @@ Future<void> _updateCurrentQuantities() async {
   if (_currentUserEmail != null) {
     try {
       for (final medication in _medications) {
-        var lastUpdatedDate = medication['lastUpdatedDate'] as DateTime;
         final today = DateTime.now();
+        var lastUpdatedDateTimestamp = medication['lastUpdatedDate'] as Timestamp;
+        var lastUpdatedDate = lastUpdatedDateTimestamp.toDate();
+        bool isTodaySameDay;
 
-        // Check if today is the same day as the last update
-        final isTodaySameDay = lastUpdatedDate.day == today.day &&
-            lastUpdatedDate.month == today.month &&
-            lastUpdatedDate.year == today.year;
+        if (lastUpdatedDateTimestamp.toDate().year == today.year &&
+            lastUpdatedDateTimestamp.toDate().month == today.month &&
+            lastUpdatedDateTimestamp.toDate().day == today.day) {
+              // It's the same date
+              isTodaySameDay = true;
+           } else {
+              // It's a different date
+              isTodaySameDay = false;
+           }
         
         if (!isTodaySameDay) {
           // Access the currentQuantity and takeQuantityPerDay from the medication document
