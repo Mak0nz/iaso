@@ -18,17 +18,19 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
+  await Workmanager().initialize(callbackDispatcher, isInDebugMode: false);
   await Workmanager().registerPeriodicTask(
     "calculate_med_quantity",
     "CalculateMedQuantity",
     // initialDelay: Duration(seconds: 5),
-    frequency: Duration(hours: 6),
+    frequency: Duration(hours: 12),
     inputData: <String, dynamic>{},
     constraints: Constraints(
       networkType: NetworkType.connected,
       //requiresDeviceIdle: true,
     ),
+    backoffPolicy: BackoffPolicy.linear,
+    backoffPolicyDelay: Duration(minutes: 30),
   );
     AwesomeNotifications().initialize(
     null,
@@ -39,7 +41,7 @@ Future main() async {
         channelDescription: 'Fogyó gyógyszer értesítési csatorna',
       )
     ],
-    debug: true,
+    debug: false,
   );
   runApp(MyApp());
 }
