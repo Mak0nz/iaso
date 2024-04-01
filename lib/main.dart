@@ -9,6 +9,7 @@ import 'package:iaso/screens/components/navigation_menu.dart';
 import 'package:iaso/screens/pages/home.dart';
 import 'package:iaso/screens/wrapper.dart';
 import 'package:iaso/themes.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:workmanager/workmanager.dart';
 import 'firebase_options.dart';
 import 'services/background/calculate_med_quantity.dart';
@@ -18,6 +19,7 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  initializeDateFormatting();
   await Workmanager().initialize(callbackDispatcher, isInDebugMode: false);
   await Workmanager().registerPeriodicTask(
     "calculate_med_quantity",
@@ -29,8 +31,6 @@ Future main() async {
       networkType: NetworkType.connected,
       //requiresDeviceIdle: true,
     ),
-    backoffPolicy: BackoffPolicy.linear,
-    backoffPolicyDelay: Duration(minutes: 30),
   );
     AwesomeNotifications().initialize(
     null,

@@ -79,6 +79,13 @@ class _CreateDailyStatsModalSheetState extends State<CreateDailyStatsModalSheet>
 
   @override
   Widget build(BuildContext context) {
+    List months = 
+    ['Január', 'Február', 'Március', 'Április', 'Május','Június','Július','Augusztus','Szeptember','Október','November','December'];
+    var currentMon = now.month;
+    final honap = months[currentMon-1];
+    
+    final selectedDate = DateTime.now(); // Initial date set to today
+
     return FloatingActionButton(
         onPressed: () => showModalBottomSheet(
           context: context, 
@@ -98,7 +105,7 @@ class _CreateDailyStatsModalSheetState extends State<CreateDailyStatsModalSheet>
                       AppBar(
                         backgroundColor: Colors.transparent,
                         centerTitle: true,
-                        title: Text("${now.month} / ${now.day}",
+                        title: Text("$honap ${now.day}",
                           style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)
                         ),
                       ),
@@ -206,6 +213,7 @@ class _CreateDailyStatsModalSheetState extends State<CreateDailyStatsModalSheet>
                             bpNightSYS: int.tryParse(controllerBpNightSYS.text) ?? 0,
                             bpNightDIA: int.tryParse(controllerBpNightDIA.text) ?? 0,
                             bpNightPulse: int.tryParse(controllerBpNightPulse.text) ?? 0,
+                            dateField: selectedDate,
                           );
                           createStatsForUser(stats);
                         },
@@ -271,6 +279,8 @@ class Stats {
   int bpNightSYS;
   int bpNightDIA;
   int bpNightPulse;
+  // ignore: prefer_typing_uninitialized_variables
+  var dateField;
 
   Stats({
     this.bpMorningSYS = 0,
@@ -281,6 +291,7 @@ class Stats {
     this.bpNightSYS = 0,
     this.bpNightDIA = 0,
     this.bpNightPulse = 0,
+    this.dateField,
   });
 
   Map<String, dynamic> toJson() => {
@@ -292,5 +303,6 @@ class Stats {
     'bpNightSYS': bpNightSYS,
     'bpNightDIA': bpNightDIA,
     'bpNightPulse': bpNightPulse,
+    'dateField': dateField,
   };
 }
