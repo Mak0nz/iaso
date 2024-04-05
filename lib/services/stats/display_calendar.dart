@@ -15,6 +15,7 @@ class _DisplayCalendarState extends State<DisplayCalendar> {
   DateTime today = DateTime.now();
   
   late DateTime firstDay;
+  bool firstSaveDayRetrieved = false; // Flag to track retrieval
 
   late final ValueNotifier<DateTime> _firstDayNotifier =
       ValueNotifier(DateTime.now()); // Initially set to current date
@@ -90,35 +91,35 @@ class _DisplayCalendarState extends State<DisplayCalendar> {
 
     if (_firstDayNotifier.value != firstDay) {
       _firstDayNotifier.value = firstDay;
+      setState(() {}); // Trigger rebuild if firstDay changed
     }
+
+    firstSaveDayRetrieved = true; // Mark retrieval as done
   }
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
       today = day; // Update selected day on user interaction
+      if (!firstSaveDayRetrieved) {
+        _retrieveFirstSaveDay(); // Retrieve if not done yet
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<void>(
-      future: _retrieveFirstSaveDay(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return TableCalendar(
-            locale: "hu_HU",
-            headerStyle: HeaderStyle(formatButtonVisible: false, titleCentered: true),
-            availableGestures: AvailableGestures.all,
-            selectedDayPredicate: (day) => isSameDay(day, today),
-            focusedDay: today,
-            firstDay: _firstDayNotifier.value,
-            lastDay: DateTime.now(),
-            onDaySelected: _onDaySelected,
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
-    );
+    return firstSaveDayRetrieved
+    ? TableCalendar(
+      locale: "hu_HU",
+      headerStyle: HeaderStyle(formatButtonVisible: false, titleCentered: true),
+      availableGestures: AvailableGestures.all,
+      startingDayOfWeek: StartingDayOfWeek.monday,
+      selectedDayPredicate: (day) => isSameDay(day, today),
+      focusedDay: today,
+      firstDay: _firstDayNotifier.value,
+      lastDay: DateTime.now(),
+      onDaySelected: _onDaySelected,
+    )
+    : const Center(child: CircularProgressIndicator());
   }
 }
