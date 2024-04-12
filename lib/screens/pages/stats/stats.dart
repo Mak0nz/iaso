@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:iaso/screens/pages/stats/create_daily_stats_modal_sheet.dart';
-import 'package:iaso/services/stats/display_calendar.dart';
+import 'package:iaso/services/stats/display_stats_page.dart';
 
 class StatsPage extends StatefulWidget {
   const StatsPage({super.key});
@@ -37,12 +37,7 @@ class _StatsPageState extends State<StatsPage> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top:90 ,bottom: 80), // No content behind appbar & floatingActionButton.
-            child: Column(
-              children: [
-                DisplayCalendar(),
-                
-              ],
-            ),
+            child: DisplayStatsPage(),
           ),
         ),
       ),
