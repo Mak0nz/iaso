@@ -123,7 +123,7 @@ Future<void> _updateCurrentQuantities() async {
           if (totalDoses <= 14) {
             AwesomeNotifications().createNotification(
               content: NotificationContent(
-                id: 10,
+                id: medication.id.hashCode,
                 channelKey: 'gyogyszer_ertesitesek',
                 title: '${medication['name']} fogyóban van!',
                 body: 'Már csak ${medication['totalDoses']} napnyi van.'
