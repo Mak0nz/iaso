@@ -250,7 +250,7 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
         ],
       );
     } else {
-      return const Center(child: Text("Nincs adat a jelen napra.", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),));
+      return const Expanded(child: Center(child: Text("Nincs adat a jelen napra.", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),)));
     }
   }
 
