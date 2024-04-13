@@ -57,7 +57,7 @@ class _DisplayMedsState extends State<DisplayMeds> {
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top:95 ,bottom: 80), // No content behind appbar & floatingActionButton.
+          padding: const EdgeInsets.only(top:85 ,bottom: 170), // No content behind appbar & floatingActionButton.
           child: Column(
             children: _medications.map((medication) {
               final data = medication.data();

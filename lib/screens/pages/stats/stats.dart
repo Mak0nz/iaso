@@ -19,7 +19,7 @@ class _StatsPageState extends State<StatsPage> {
       appBar: AppBar(
         flexibleSpace: ClipRect(
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
             child: Container(color: Colors.transparent,),
           ),
         ),
@@ -36,7 +36,7 @@ class _StatsPageState extends State<StatsPage> {
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(top:90 ,bottom: 80), // No content behind appbar & floatingActionButton.
+            padding: const EdgeInsets.only(top:75 ,bottom: 170), // No content behind appbar & floatingActionButton.
             child: DisplayStatsPage(),
           ),
         ),

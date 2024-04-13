@@ -86,7 +86,9 @@ class _CreateDailyStatsModalSheetState extends State<CreateDailyStatsModalSheet>
     
     final selectedDate = DateTime.now(); // Initial date set to today
 
-    return FloatingActionButton(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 90), // to not hide behind bottom navigation bar
+      child: FloatingActionButton(
         onPressed: () => showModalBottomSheet(
           context: context, 
           enableDrag: true,
@@ -97,7 +99,7 @@ class _CreateDailyStatsModalSheetState extends State<CreateDailyStatsModalSheet>
           builder: (context) => (
             ClipRRect(
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(10, 35, 10, 10),
                   child: Column(
@@ -240,7 +242,8 @@ class _CreateDailyStatsModalSheetState extends State<CreateDailyStatsModalSheet>
             )
           ),
         ),
-      child: const Icon(FontAwesomeIcons.plus),
+        child: const Icon(FontAwesomeIcons.plus),
+      ),
     );
   }
 

@@ -87,7 +87,7 @@ class _EditMedModalState extends State<EditMedModal> {
         builder: (context) => (
           ClipRRect(
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(10, 35, 10, 10),
                 child: SingleChildScrollView(

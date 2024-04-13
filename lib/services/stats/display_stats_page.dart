@@ -269,6 +269,10 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
           firstDay: _firstDayNotifier.value,
           lastDay: DateTime.now(),
           onDaySelected: _onDaySelected,
+          calendarStyle: CalendarStyle(
+            todayDecoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue.shade300),
+            selectedDecoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue.shade400),
+          ),
         ),
         ValueListenableBuilder(
           valueListenable: _onDaySelectedEvent, 

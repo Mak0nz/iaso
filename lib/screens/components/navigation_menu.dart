@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -35,31 +37,38 @@ class _NavigationMenuState extends State<NavigationMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(boxShadow: [
-          BoxShadow(
-            color: Colors.black,
-            blurRadius: 15,
-          )
-        ]),
+        margin: const EdgeInsets.only(left: 12,right: 12,bottom: 12),
+        decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+              color: Colors.black.withAlpha(20),
+              blurRadius: 20,
+              spreadRadius: 10,
+            )
+          ],
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Colors.grey.shade900.withAlpha(20), width: 2.0, style: BorderStyle.solid),
+        ),
         child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(15),
-            topRight: Radius.circular(15),
-          ),
-          child: NavigationBar(
-            selectedIndex: currentIndex,
-            onDestinationSelected: (index) {
-              setState(() {
-                currentIndex = index;
-              });
-            },
-            destinations: const [
-              NavigationDestination(icon: Icon(FontAwesomeIcons.house), label: 'főoldal'),
-              NavigationDestination(icon: Icon(FontAwesomeIcons.heartCirclePlus), label: 'mérések'),
-              NavigationDestination(icon: Icon(FontAwesomeIcons.capsules), label: 'gyógyszer'),
-              NavigationDestination(icon: Icon(FontAwesomeIcons.circleInfo), label: 'infó'),
-            ],
+          borderRadius: BorderRadius.circular(15),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+            child: NavigationBar(
+              //backgroundColor: Colors.transparent,
+              selectedIndex: currentIndex,
+              onDestinationSelected: (index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+              destinations: const [
+                NavigationDestination(icon: Icon(FontAwesomeIcons.house), label: 'főoldal'),
+                NavigationDestination(icon: Icon(FontAwesomeIcons.heartCirclePlus), label: 'mérések'),
+                NavigationDestination(icon: Icon(FontAwesomeIcons.capsules), label: 'gyógyszer'),
+                NavigationDestination(icon: Icon(FontAwesomeIcons.circleInfo), label: 'infó'),
+              ],
+            ),
           ),
         ),
       ),

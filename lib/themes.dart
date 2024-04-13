@@ -9,13 +9,13 @@ class ThemeClass {
       backgroundColor: Colors.white.withAlpha(200),
     ),
     navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: Colors.white.withAlpha(220),
+      backgroundColor: Colors.white.withAlpha(200),
       indicatorColor: Colors.blue.shade400,
       elevation: 3,
       labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
     ),
     colorScheme: ColorScheme.light(
-      primary: Colors.blue,
+      primary: Colors.blue.shade400,
     ),
   );
 
@@ -24,7 +24,7 @@ class ThemeClass {
     fontFamily: 'Poppins',
     brightness: Brightness.dark,
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.black26.withAlpha(200),
+      backgroundColor: Colors.black26.withAlpha(220),
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: Colors.black26.withAlpha(220),
@@ -33,7 +33,7 @@ class ThemeClass {
       labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
     ),
     colorScheme: ColorScheme.dark(
-      primary: Colors.blue,
+      primary: Colors.blue.shade400,
     ),
   );
 }
