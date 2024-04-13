@@ -143,9 +143,8 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
   }
   
   Widget _buildStatsIfAvailable() {
-    if (statsSnapshot != null) {
+    if (statsSnapshot?.exists ?? false) {
       // Map the data from statsSnapshot to individual stats widgets
-      // Example:
       Map<String, dynamic> data = statsSnapshot!.data()! as Map<String, dynamic>;
       return Column(
         children: [
@@ -250,7 +249,7 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
         ],
       );
     } else {
-      return const Expanded(child: Center(child: Text("Nincs adat a jelen napra.", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),)));
+      return const Center(child: Text("Nincs adat a jelen napra.", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),));
     }
   }
 
