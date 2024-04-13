@@ -126,7 +126,7 @@ Future<void> _updateCurrentQuantities() async {
                 id: medication.id.hashCode,
                 channelKey: 'gyogyszer_ertesitesek',
                 title: '${medication['name']} fogyóban van!',
-                body: 'Már csak ${medication['totalDoses']} napnyi van.'
+                body: 'Már csak $totalDoses napnyi van.'
               )
             );
           }
