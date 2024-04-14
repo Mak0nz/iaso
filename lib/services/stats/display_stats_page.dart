@@ -148,7 +148,8 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
       Map<String, dynamic> data = statsSnapshot!.data()! as Map<String, dynamic>;
       return Column(
         children: [
-          Card(
+          data['weight'] != 0 ? 
+            Card(
             shape: RoundedRectangleBorder(
               side: BorderSide(color: Colors.grey.shade900, width: 2.0),
               borderRadius: BorderRadius.circular(15),
@@ -163,11 +164,12 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
                 ],
               ),
             ),
-          ),
+          ) : Card(),
 
           SizedBox(height: 5,),
 
-          Card(
+          data['temp'] != 0 ? 
+            Card(
             shape: RoundedRectangleBorder(
               side: BorderSide(color: Colors.grey.shade900, width: 2.0),
               borderRadius: BorderRadius.circular(15),
@@ -182,11 +184,12 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
                 ],
               ),
             ),
-          ),
+          ) : Card(),
 
           SizedBox(height: 5,),
 
-          Card(
+          data['bpMorningSYS'] != 0 || data['bpMorningDIA'] != 0 || data['bpMorningPulse'] != 0 ? 
+            Card(
             shape: RoundedRectangleBorder(
               side: BorderSide(color: Colors.grey.shade900, width: 2.0),
               borderRadius: BorderRadius.circular(15),
@@ -213,11 +216,12 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
                 ],
               ),
             ),
-          ),
+          ) : Card(), 
           
           SizedBox(height: 5,),
 
-          Card(
+          data['bpNightSYS'] != 0 || data['bpNightDIA'] != 0 || data['bpNightPulse'] != 0 ? 
+            Card(
             shape: RoundedRectangleBorder(
               side: BorderSide(color: Colors.grey.shade900, width: 2.0),
               borderRadius: BorderRadius.circular(15),
@@ -244,7 +248,7 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
                 ],
               ),
             ),
-          ),
+          ) : Card(), 
 
         ],
       );

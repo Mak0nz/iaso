@@ -118,17 +118,18 @@ Future<void> _updateCurrentQuantities() async {
                 .collection('MedsForUser')
                 .doc(medication.id)
                 .update(updatedValues);
-          }
-          
-          if (totalDoses <= 14) {
-            AwesomeNotifications().createNotification(
-              content: NotificationContent(
-                id: medication.id.hashCode,
-                channelKey: 'gyogyszer_ertesitesek',
-                title: '${medication['name']} fogyóban van!',
-                body: 'Már csak $totalDoses napnyi van.'
-              )
-            );
+            
+            // send notification
+            if (totalDoses-1 <= 14) {
+              AwesomeNotifications().createNotification(
+                content: NotificationContent(
+                  id: medication.id.hashCode,
+                  channelKey: 'gyogyszer_ertesitesek',
+                  title: '${medication['name']} fogyóban van!',
+                  body: 'Már csak ${totalDoses-1} napnyi van.'
+                )
+              );
+            }
           }
 
         }
