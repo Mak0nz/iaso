@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iaso/screens/auth/sign_up.dart';
 import 'package:iaso/services/firebase_auth.dart';
+import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/form_container_widget.dart';
 import 'package:iaso/widgets/toast.dart';
 
@@ -75,22 +76,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 15,),
               // Login button
-                GestureDetector(
+                AnimatedButton(
                   onTap: _signIn,
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      color: Colors.blue.shade400,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center( child: _isSigning ? CircularProgressIndicator(color: Colors.white,):
-                      Text("Bejelentkezés", 
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                    ),
-                  ),
+                  text: "Bejelentkezés",
+                  progressEvent: _isSigning,
                 ),
+
                 SizedBox(height: 15),
               // or continue with
                 Row(
@@ -115,9 +106,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 15,),
               // login using google
-                GestureDetector(
+                InkWell(
                   onTap: _signInWithGoogle,
-                  child: Container(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Ink(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),

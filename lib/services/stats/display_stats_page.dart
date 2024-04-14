@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:iaso/widgets/card_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -149,12 +150,7 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
       return Column(
         children: [
           data['weight'] != 0 ? 
-            Card(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.grey.shade900, width: 2.0),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ListTile(
+            CustomCard(
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -163,18 +159,13 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
                   const Text(" Kg", style: TextStyle(fontSize: 18),),
                 ],
               ),
-            ),
-          ) : Card(),
+            )
+          : Card(),
 
           SizedBox(height: 5,),
 
           data['temp'] != 0 ? 
-            Card(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.grey.shade900, width: 2.0),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ListTile(
+            CustomCard(
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -183,18 +174,13 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
                   const Text(" °C", style: TextStyle(fontSize: 18),),
                 ],
               ),
-            ),
-          ) : Card(),
+            )
+          : Card(),
 
           SizedBox(height: 5,),
 
           data['bpMorningSYS'] != 0 || data['bpMorningDIA'] != 0 || data['bpMorningPulse'] != 0 ? 
-            Card(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.grey.shade900, width: 2.0),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ListTile(
+            CustomCard(
               title: Column(
                 children: [
                   Align(
@@ -215,18 +201,13 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
                   ),
                 ],
               ),
-            ),
-          ) : Card(), 
+            )
+          : Card(), 
           
           SizedBox(height: 5,),
 
           data['bpNightSYS'] != 0 || data['bpNightDIA'] != 0 || data['bpNightPulse'] != 0 ? 
-            Card(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.grey.shade900, width: 2.0),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ListTile(
+            CustomCard(
               title: Column(
                 children: [
                   Align(
@@ -247,8 +228,8 @@ class _DisplayStatsPageState extends State<DisplayStatsPage> {
                   ),
                 ],
               ),
-            ),
-          ) : Card(), 
+            )
+          : Card(), 
 
         ],
       );

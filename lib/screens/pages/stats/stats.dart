@@ -1,8 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:iaso/screens/pages/stats/create_daily_stats_modal_sheet.dart';
 import 'package:iaso/services/stats/display_stats_page.dart';
+import 'package:iaso/widgets/appbar_widget.dart';
 
 class StatsPage extends StatefulWidget {
   const StatsPage({super.key});
@@ -16,19 +15,7 @@ class _StatsPageState extends State<StatsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        flexibleSpace: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-            child: Container(color: Colors.transparent,),
-          ),
-        ),
-        automaticallyImplyLeading: false,
-        title: Text("Napi mérések",
-            style: TextStyle(fontWeight: FontWeight.bold)
-          ),
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(title: "Napi mérések"),
 
       floatingActionButton: CreateDailyStatsModalSheet(),
 

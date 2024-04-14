@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iaso/screens/auth/log_in.dart';
 import 'package:iaso/services/firebase_auth.dart';
+import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/form_container_widget.dart';
 import 'package:iaso/widgets/toast.dart';
 
@@ -83,21 +84,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 SizedBox(height: 15,),
               // signup button
-                GestureDetector(
+                AnimatedButton(
                   onTap: _signUp,
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      color: Colors.blue.shade400,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center( child: _isSigningUp ? CircularProgressIndicator(color: Colors.white,):
-                      Text("Feliratkozás", 
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                    ),
-                  ),
+                  text: "Feliratkozás",
+                  progressEvent: _isSigningUp,
                 ),
                 SizedBox(height: 15),
               // already have an account? login

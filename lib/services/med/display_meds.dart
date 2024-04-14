@@ -1,14 +1,19 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_typing_uninitialized_variables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iaso/services/med/edit_med_modal.dart';
+import 'package:iaso/widgets/card_widget.dart';
 
 class DisplayMeds extends StatefulWidget {
+  final showAll;
 
-  const DisplayMeds({ super.key});
+  const DisplayMeds({ 
+    super.key,
+    required this.showAll,
+  });
 
   @override
   State<DisplayMeds> createState() => _DisplayMedsState();
@@ -37,7 +42,15 @@ class _DisplayMedsState extends State<DisplayMeds> {
             .collection('MedsForUser');
 
         // Query the subcollection, order by a specific field (e.g., 'name')
-        final querySnapshot = await medsCollectionRef.orderBy('name').get();
+        final Query<Map<String, dynamic>> query;
+        if (widget.showAll) {
+          query = medsCollectionRef.orderBy('name');
+        } else {
+          query = medsCollectionRef.where('totalDoses', isLessThan: 14)
+            .orderBy('totalDoses');
+        }
+
+        final querySnapshot = await query.get();
 
         // Update state with the retrieved medications
         setState(() {
@@ -59,29 +72,44 @@ class _DisplayMedsState extends State<DisplayMeds> {
         child: Padding(
           padding: const EdgeInsets.only(top:85 ,bottom: 170), // No content behind appbar & floatingActionButton.
           child: Column(
-            children: _medications.map((medication) {
-              final data = medication.data();
-              String name = (data as Map<String, dynamic>)['name'] ?? 'No name';
-              final totalDoses = data['totalDoses'] as int;
+            children: [
+              widget.showAll == false 
+              ? Text("Fogyóban lévő Gyógyszerek:", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold,),)
+              : Card(),
 
-              // Calculate border color based on totalDoses
-              final borderColor = totalDoses <= 7
-                ? Colors.red
-                : totalDoses <= 14 ? Colors.orange : Colors.grey.shade900;
+              widget.showAll == false && _medications.isEmpty
+              ? Column(
+                  children: [
+                    SizedBox(height: 15,),
+                    CustomCard(
+                      leading:  Icon(FontAwesomeIcons.pills),
+                      title: Text("Jelenleg nincs fogyóban levő gyógyszer", style: TextStyle(fontSize: 20,),),
+                    ),
+                  ],
+                )
+              : Card(),
 
-              return Card(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: borderColor, width: 2.0),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: ListTile(
-                  leading: data['isInCloud'] ? Icon(FontAwesomeIcons.cloud) : null,
-                  title: Text(name, style: TextStyle(fontWeight: FontWeight.bold),),
-                  subtitle: Text('${data['totalDoses']} napnyi van.'),
-                  trailing: medication.exists ? EditMedModal(medication: medication.id,) : null,
-                ),
-              );
-            }).toList(),
+              Column(
+                children: _medications.map((medication) {
+                  final data = medication.data();
+                  String name = (data as Map<String, dynamic>)['name'] ?? 'No name';
+                  final totalDoses = data['totalDoses'] as int;
+              
+                  // Calculate border color based on totalDoses
+                  final borderColor = totalDoses <= 7
+                    ? Colors.red
+                    : totalDoses <= 14 ? Colors.orange : Colors.grey.shade900;
+              
+                  return CustomCard(
+                    borderColor: borderColor,
+                    leading: data['isInCloud'] ? Icon(FontAwesomeIcons.cloud) : null,
+                    title: Text(name, style: TextStyle(fontWeight: FontWeight.bold),),
+                    subtitle: Text('${data['totalDoses']} napnyi van.'),
+                    trailing: medication.exists ? EditMedModal(medication: medication.id,) : null,
+                  );
+                }).toList(),
+              ),
+            ],
           ),
         ),
       ),

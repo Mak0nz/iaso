@@ -1,9 +1,9 @@
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:iaso/services/med/display_meds.dart';
+import 'package:iaso/widgets/appbar_widget.dart';
 import 'package:iaso/widgets/toast.dart';
 
 class Home extends StatefulWidget {
@@ -58,48 +58,26 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        flexibleSpace: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-            child: Container(color: Colors.transparent,),
-          ),
-        ),
-        automaticallyImplyLeading: false,
-        title: 
-          Text(greetingText,
-            style: TextStyle(fontWeight: FontWeight.bold)
-          ),
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: CircleAvatar(
+      appBar: CustomAppBar(
+        title: greetingText,
+        leading: CircleAvatar(
             backgroundImage: imageProvider,
-          ),
         ),
-        actions: <Widget>[
-          GestureDetector(
-            onTap: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.pushNamed(context, "/login");
-              showToast(message: "Sikeresen kijelentkezve");
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Icon(FontAwesomeIcons.rightFromBracket,),
-            ),
-          ),
-        ],
+        actions: Icon(FontAwesomeIcons.rightFromBracket,),
+        actionsEvent: () {
+          FirebaseAuth.instance.signOut();
+          Navigator.pushNamed(context, "/login");
+          showToast(message: "Sikeresen kijelentkezve");
+        },
       ),
 
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 90,), // No content behind appbar on pageload.
-              
-            ],
-          ),
+        padding: const EdgeInsets.fromLTRB(10, 85, 10, 0), // No content behind appbar on pageload.
+        child: Column(
+          children: [
+            DisplayMeds(showAll: false),
+            
+          ], 
         ),
       ), 
 

@@ -1,11 +1,9 @@
 // ignore_for_file: avoid_unnecessary_containers
-
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/input_text_form_widget.dart';
 import 'package:iaso/widgets/toast.dart';
 
@@ -98,145 +96,130 @@ class _CreateDailyStatsModalSheetState extends State<CreateDailyStatsModalSheet>
             : Colors.blueGrey[900]?.withAlpha(200), // Dark theme color
           builder: (context) => (
             ClipRRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(10, 35, 10, 10),
-                  child: Column(
-                    children: [
-                      AppBar(
-                        backgroundColor: Colors.transparent,
-                        centerTitle: true,
-                        title: Text("$honap ${now.day}",
-                          style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(10, 35, 10, 10),
+                child: Column(
+                  children: [
+                    AppBar(
+                      backgroundColor: Colors.transparent,
+                      centerTitle: true,
+                      title: Text("$honap ${now.day}",
+                        style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)
+                      ),
+                    ),
+                    
+                    SizedBox(height: 9,),
+                    Text("Reggeli vérnyomás:", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
+                    SizedBox(height: 2,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InputTextFormWidget(
+                          width: 60.0,
+                          controller: controllerBpMorningSYS,
+                          labelText: 'SYS',
                         ),
-                      ),
-                      
-                      SizedBox(height: 9,),
-                      Text("Reggeli vérnyomás:", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
-                      SizedBox(height: 2,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InputTextFormWidget(
-                            width: 60.0,
-                            controller: controllerBpMorningSYS,
-                            labelText: 'SYS',
-                          ),
-                          const Text("/", style: TextStyle(fontSize: 16),),
-                          InputTextFormWidget(
-                            width: 60.0,
-                            controller: controllerBpMorningDIA,
-                            labelText: 'DIA',
-                          ),
-                          const Text("mmHg", style: TextStyle(fontSize: 16),),
-                          SizedBox(
-                            width: 10.0, // Add horizontal spacing between the fields
-                          ),
-                          InputTextFormWidget(
-                            width: 80.0,
-                            controller: controllerBpMorningPulse,
-                            labelText: 'Pulzus',
-                          ),
-                          const Text("bpm", style: TextStyle(fontSize: 16),),
-                        ],
-                      ), 
-                      
-                      SizedBox(height: 22,),
-                  
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Hőmérséklet:   ", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
-                          InputTextFormWidget(
-                            width: 80.0,
-                            controller: controllerTemp,
-                            labelText: '00.0',
-                          ),
-                          const Text("°C", style: TextStyle(fontSize: 16),),
-                        ],
-                      ),
-                      
-                      SizedBox(height: 22,),
-                  
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Súly:   ", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
-                          InputTextFormWidget(
-                            width: 80.0,
-                            controller: controllerWeight,
-                            labelText: '00.0',
-                          ),
-                          const Text("Kg", style: TextStyle(fontSize: 16),),
-                        ],
-                      ),
-                      
-                      SizedBox(height: 22,),
-                  
-                      Text("Esti vérnyomás:", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
-                      SizedBox(height: 2,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InputTextFormWidget(
-                            width: 60.0,
-                            controller: controllerBpNightSYS,
-                            labelText: 'SYS',
-                          ),
-                          const Text("/", style: TextStyle(fontSize: 16),),
-                          InputTextFormWidget(
-                            width: 60.0,
-                            controller: controllerBpNightDIA,
-                            labelText: 'DIA',
-                          ),
-                          const Text("mmHg", style: TextStyle(fontSize: 16),),
-                          SizedBox(
-                            width: 10.0, // Add horizontal spacing between the fields
-                          ),
-                          InputTextFormWidget(
-                            width: 80.0,
-                            controller: controllerBpNightPulse,
-                            labelText: 'Pulzus',
-                          ),
-                          const Text("bpm", style: TextStyle(fontSize: 16),),
-                        ],
-                      ),
-                      SizedBox(height: 16,),
-                  
-                      GestureDetector(
-                        onTap: () {
-                          final stats = Stats(
-                            bpMorningSYS: int.tryParse(controllerBpMorningSYS.text) ?? 0,
-                            bpMorningDIA: int.tryParse(controllerBpMorningDIA.text) ?? 0,
-                            bpMorningPulse: int.tryParse(controllerBpMorningPulse.text) ?? 0,
-                            weight: double.tryParse(controllerWeight.text) ?? 0,
-                            temp: double.tryParse(controllerTemp.text) ?? 0,
-                            bpNightSYS: int.tryParse(controllerBpNightSYS.text) ?? 0,
-                            bpNightDIA: int.tryParse(controllerBpNightDIA.text) ?? 0,
-                            bpNightPulse: int.tryParse(controllerBpNightPulse.text) ?? 0,
-                            dateField: selectedDate,
-                          );
-                          createStatsForUser(stats);
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            color: Colors.blue.shade400,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Center(
-                            child: Center( child: _isSaving ? CircularProgressIndicator(color: Colors.white,):
-                              Text("Napi mérés mentése", 
-                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
-                            ),  
-                          ),
+                        const Text("/", style: TextStyle(fontSize: 16),),
+                        InputTextFormWidget(
+                          width: 60.0,
+                          controller: controllerBpMorningDIA,
+                          labelText: 'DIA',
                         ),
-                      ),
-                    ],
-                  ),
+                        const Text("mmHg", style: TextStyle(fontSize: 16),),
+                        SizedBox(
+                          width: 10.0, // Add horizontal spacing between the fields
+                        ),
+                        InputTextFormWidget(
+                          width: 80.0,
+                          controller: controllerBpMorningPulse,
+                          labelText: 'Pulzus',
+                        ),
+                        const Text("bpm", style: TextStyle(fontSize: 16),),
+                      ],
+                    ), 
+                    
+                    SizedBox(height: 22,),
+                
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Hőmérséklet:   ", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
+                        InputTextFormWidget(
+                          width: 80.0,
+                          controller: controllerTemp,
+                          labelText: '00.0',
+                        ),
+                        const Text("°C", style: TextStyle(fontSize: 16),),
+                      ],
+                    ),
+                    
+                    SizedBox(height: 22,),
+                
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Súly:   ", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
+                        InputTextFormWidget(
+                          width: 80.0,
+                          controller: controllerWeight,
+                          labelText: '00.0',
+                        ),
+                        const Text("Kg", style: TextStyle(fontSize: 16),),
+                      ],
+                    ),
+                    
+                    SizedBox(height: 22,),
+                
+                    Text("Esti vérnyomás:", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
+                    SizedBox(height: 2,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InputTextFormWidget(
+                          width: 60.0,
+                          controller: controllerBpNightSYS,
+                          labelText: 'SYS',
+                        ),
+                        const Text("/", style: TextStyle(fontSize: 16),),
+                        InputTextFormWidget(
+                          width: 60.0,
+                          controller: controllerBpNightDIA,
+                          labelText: 'DIA',
+                        ),
+                        const Text("mmHg", style: TextStyle(fontSize: 16),),
+                        SizedBox(
+                          width: 10.0, // Add horizontal spacing between the fields
+                        ),
+                        InputTextFormWidget(
+                          width: 80.0,
+                          controller: controllerBpNightPulse,
+                          labelText: 'Pulzus',
+                        ),
+                        const Text("bpm", style: TextStyle(fontSize: 16),),
+                      ],
+                    ),
+                    SizedBox(height: 16,),
+
+                    AnimatedButton(
+                      onTap: () {
+                        final stats = Stats(
+                          bpMorningSYS: int.tryParse(controllerBpMorningSYS.text) ?? 0,
+                          bpMorningDIA: int.tryParse(controllerBpMorningDIA.text) ?? 0,
+                          bpMorningPulse: int.tryParse(controllerBpMorningPulse.text) ?? 0,
+                          weight: double.tryParse(controllerWeight.text) ?? 0,
+                          temp: double.tryParse(controllerTemp.text) ?? 0,
+                          bpNightSYS: int.tryParse(controllerBpNightSYS.text) ?? 0,
+                          bpNightDIA: int.tryParse(controllerBpNightDIA.text) ?? 0,
+                          bpNightPulse: int.tryParse(controllerBpNightPulse.text) ?? 0,
+                          dateField: selectedDate,
+                        );
+                        createStatsForUser(stats);
+                      },
+                      text: "Napi mérés mentése",
+                      progressEvent: _isSaving,
+                    ),
+
+                  ],
                 ),
               ),
             )

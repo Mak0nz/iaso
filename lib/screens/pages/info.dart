@@ -1,5 +1,5 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:iaso/widgets/appbar_widget.dart';
 
 class InfoPage extends StatelessWidget {
   const InfoPage({super.key});
@@ -7,20 +7,8 @@ class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        flexibleSpace: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-            child: Container(color: Colors.transparent,),
-          ),
-        ),
-        automaticallyImplyLeading: false,
-        title: Text("Infó",
-            style: TextStyle(fontWeight: FontWeight.bold)
-          ),
-        centerTitle: true,
-      ),
+      extendBodyBehindAppBar: true,
+      appBar: CustomAppBar(title: "Infó"),
 
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10),
