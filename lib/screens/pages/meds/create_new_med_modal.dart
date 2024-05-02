@@ -6,6 +6,7 @@ import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/checkbox_widget.dart';
 import 'package:iaso/widgets/input_med_form_widget.dart';
 import 'package:iaso/widgets/toast.dart';
+import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 class CreateNewMedModal extends StatefulWidget {
   const CreateNewMedModal({super.key});
@@ -38,177 +39,174 @@ class _CreateNewMedModalState extends State<CreateNewMedModal> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 90),
       child: FloatingActionButton(
-        onPressed: () => showModalBottomSheet(
-          context: context,
-          enableDrag: true,
-          isScrollControlled: true,
-          backgroundColor: Theme.of(context).brightness == Brightness.light
-            ? Colors.white.withAlpha(200) // Light theme color
-            : Colors.blueGrey[900]?.withAlpha(200), // Dark theme color
-          builder: (context) => (
-            ClipRRect(
+        onPressed: () {
+          WoltModalSheet.show(context: context, pageListBuilder: (context) {
+            return [WoltModalSheetPage(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(10, 35, 10, 10),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      AppBar(
-                        backgroundColor: Colors.transparent,
-                        centerTitle: true,
-                        title: Text("Új gyógyszer",
-                          style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)
-                        ),
-                      ),
-                      SizedBox(height: 9,),
-    
-                      InputMedFormWidget(
-                        labelText: "Gyógyszer neve",
-                        controller: controllerName,
-                      ),
-    
-                      InputMedFormWidget(
-                        labelText: "Hatóanyag",
-                        controller: controllerActiveAgent,
-                      ),
-    
-                      InputMedFormWidget(
-                        labelText: "Hatás",
-                        controller: controllerUseCase,
-                      ),
-    
-                      InputMedFormWidget(
-                        labelText: "Mellékhatás",
-                        controller: controllerSideEffect,
-                      ),
-    
-                      InputMedFormWidget(
-                        labelText: "Napi mennyiség",
-                        controller: controllerTakeQuantityPerDay,
-                        textInputType: TextInputType.number,
-                      ),
-    
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text("  Mely napokon kell bevenni:",
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.bold
-                                ),
-                                textAlign: TextAlign.start,
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 35),
+                child: Column(
+                  children: [
+
+                    SizedBox(height: 9,),
+  
+                    InputMedFormWidget(
+                      labelText: "Gyógyszer neve",
+                      controller: controllerName,
+                    ),
+  
+                    InputMedFormWidget(
+                      labelText: "Hatóanyag",
+                      controller: controllerActiveAgent,
+                    ),
+  
+                    InputMedFormWidget(
+                      labelText: "Hatás",
+                      controller: controllerUseCase,
+                    ),
+  
+                    InputMedFormWidget(
+                      labelText: "Mellékhatás",
+                      controller: controllerSideEffect,
+                    ),
+  
+                    InputMedFormWidget(
+                      labelText: "Napi mennyiség",
+                      controller: controllerTakeQuantityPerDay,
+                      textInputType: TextInputType.number,
+                    ),
+  
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("  Mely napokon kell bevenni:",
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.bold
                               ),
+                              textAlign: TextAlign.start,
                             ),
-    
-                            CheckboxWidget(
-                              label: "Hétfő",
-                              initialValue: controllerTakeMonday,
-                              onChanged: (newValue) => setState(() => controllerTakeMonday = newValue),
-                            ),
-    
-                            CheckboxWidget(
-                              label: "Kedd",
-                              initialValue: controllerTakeTuesday,
-                              onChanged: (newValue) => setState(() => controllerTakeTuesday = newValue),
-                            ),
-    
-                            CheckboxWidget(
-                              label: "Szerda",
-                              initialValue: controllerTakeWednesday,
-                              onChanged: (newValue) => setState(() => controllerTakeWednesday = newValue),
-                            ),
-    
-                            CheckboxWidget(
-                              label: "Csütörtök",
-                              initialValue: controllerTakeThursday,
-                              onChanged: (newValue) => setState(() => controllerTakeThursday = newValue),
-                            ),
-    
-                            CheckboxWidget(
-                              label: "Péntek",
-                              initialValue: controllerTakeFriday,
-                              onChanged: (newValue) => setState(() => controllerTakeFriday = newValue),
-                            ),
-    
-                            CheckboxWidget(
-                              label: "Szombat",
-                              initialValue: controllerTakeSaturday,
-                              onChanged: (newValue) => setState(() => controllerTakeSaturday = newValue),
-                            ),
-    
-                            CheckboxWidget(
-                              label: "Vasárnap",
-                              initialValue: controllerTakeSunday,
-                              onChanged: (newValue) => setState(() => controllerTakeSunday = newValue),
-                            ),
-                          ],
-                        ),
+                          ),
+  
+                          CheckboxWidget(
+                            label: "Hétfő",
+                            initialValue: controllerTakeMonday,
+                            onChanged: (newValue) => setState(() => controllerTakeMonday = newValue),
+                          ),
+  
+                          CheckboxWidget(
+                            label: "Kedd",
+                            initialValue: controllerTakeTuesday,
+                            onChanged: (newValue) => setState(() => controllerTakeTuesday = newValue),
+                          ),
+  
+                          CheckboxWidget(
+                            label: "Szerda",
+                            initialValue: controllerTakeWednesday,
+                            onChanged: (newValue) => setState(() => controllerTakeWednesday = newValue),
+                          ),
+  
+                          CheckboxWidget(
+                            label: "Csütörtök",
+                            initialValue: controllerTakeThursday,
+                            onChanged: (newValue) => setState(() => controllerTakeThursday = newValue),
+                          ),
+  
+                          CheckboxWidget(
+                            label: "Péntek",
+                            initialValue: controllerTakeFriday,
+                            onChanged: (newValue) => setState(() => controllerTakeFriday = newValue),
+                          ),
+  
+                          CheckboxWidget(
+                            label: "Szombat",
+                            initialValue: controllerTakeSaturday,
+                            onChanged: (newValue) => setState(() => controllerTakeSaturday = newValue),
+                          ),
+  
+                          CheckboxWidget(
+                            label: "Vasárnap",
+                            initialValue: controllerTakeSunday,
+                            onChanged: (newValue) => setState(() => controllerTakeSunday = newValue),
+                          ),
+                        ],
                       ),
-    
-                      InputMedFormWidget(
-                        labelText: "Hány darab van",
-                        controller: controllerCurrentQuantity,
-                        textInputType: TextInputType.number,
-                      ),
-    
-                      InputMedFormWidget(
-                        labelText: "Kivel kell feliratni",
-                        controller: controllerOrderedBy,
-                      ),
-    
-                      CheckboxWidget(
-                        label: "Van-e a felhőben",
-                        initialValue: controllerIsInCloud,
-                        onChanged: (newValue) => setState(() => controllerIsInCloud = newValue),
-                      ),
-    
-                      SizedBox(height: 5,),
+                    ),
+  
+                    InputMedFormWidget(
+                      labelText: "Hány darab van",
+                      controller: controllerCurrentQuantity,
+                      textInputType: TextInputType.number,
+                    ),
+  
+                    InputMedFormWidget(
+                      labelText: "Kivel kell feliratni",
+                      controller: controllerOrderedBy,
+                    ),
+  
+                    CheckboxWidget(
+                      label: "Van-e a felhőben",
+                      initialValue: controllerIsInCloud,
+                      onChanged: (newValue) => setState(() => controllerIsInCloud = newValue),
+                    ),
+  
+                    SizedBox(height: 5,),
 
-                      AnimatedButton(
-                        onTap: () {
-                          final totalDoses = int.parse(controllerCurrentQuantity.text) ~/ int.parse(controllerTakeQuantityPerDay.text);
-                          // Ensure lastDays is not negative
-                          final updatedTotalDoses = totalDoses > 0 ? totalDoses : 0;
-    
-                          // update date to be today
-                          final lastUpdatedDate = DateTime.now();
-    
-                          final info = Info(
-                            name: controllerName.text,
-                            activeAgent: controllerActiveAgent.text,
-                            useCase: controllerUseCase.text,
-                            sideEffect: controllerSideEffect.text,
-                            takeQuantityPerDay: int.parse(controllerTakeQuantityPerDay.text),
-                            takeMonday: controllerTakeMonday,
-                            takeTuesday: controllerTakeTuesday,
-                            takeWednesday: controllerTakeWednesday,
-                            takeThursday: controllerTakeThursday,
-                            takeFriday: controllerTakeFriday,
-                            takeSaturday: controllerTakeSaturday,
-                            takeSunday: controllerTakeSunday,
-                            currentQuantity: int.parse(controllerCurrentQuantity.text),
-                            orderedBy: controllerOrderedBy.text,
-                            isInCloud: controllerIsInCloud,
-                            totalDoses: updatedTotalDoses,
-                            lastUpdatedDate: lastUpdatedDate,
-                          );
-                          createNewMed(info);
-                        },
-                        text: "Új gyógyszer mentése", 
-                        progressEvent: _isSaving,
-                      ),
-    
-                      SizedBox(height: 10,),
+                    AnimatedButton(
+                      onTap: () {
+                        final totalDoses = int.parse(controllerCurrentQuantity.text) ~/ int.parse(controllerTakeQuantityPerDay.text);
+                        // Ensure lastDays is not negative
+                        final updatedTotalDoses = totalDoses > 0 ? totalDoses : 0;
+  
+                        // update date to be today
+                        final lastUpdatedDate = DateTime.now();
+  
+                        final info = Info(
+                          name: controllerName.text,
+                          activeAgent: controllerActiveAgent.text,
+                          useCase: controllerUseCase.text,
+                          sideEffect: controllerSideEffect.text,
+                          takeQuantityPerDay: int.parse(controllerTakeQuantityPerDay.text),
+                          takeMonday: controllerTakeMonday,
+                          takeTuesday: controllerTakeTuesday,
+                          takeWednesday: controllerTakeWednesday,
+                          takeThursday: controllerTakeThursday,
+                          takeFriday: controllerTakeFriday,
+                          takeSaturday: controllerTakeSaturday,
+                          takeSunday: controllerTakeSunday,
+                          currentQuantity: int.parse(controllerCurrentQuantity.text),
+                          orderedBy: controllerOrderedBy.text,
+                          isInCloud: controllerIsInCloud,
+                          totalDoses: updatedTotalDoses,
+                          lastUpdatedDate: lastUpdatedDate,
+                        );
+                        createNewMed(info);
+                      },
+                      text: "Új gyógyszer mentése", 
+                      progressEvent: _isSaving,
+                    ),
 
-                    ],
-                  ),
+                  ],
                 ),
               ),
-            )
-          ),
-        ),
+              topBarTitle: Text("Új gyógyszer",
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)
+              ),
+              isTopBarLayerAlwaysVisible: true,
+              trailingNavBarWidget: IconButton(
+                padding: const EdgeInsets.all(20),
+                onPressed: Navigator.of(context).pop, 
+                icon: const Icon(FontAwesomeIcons.xmark)
+              ),
+              enableDrag: false,
+              backgroundColor: Theme.of(context).brightness == Brightness.light
+                ? Colors.white.withAlpha(200) // Light theme color
+                : Colors.blueGrey[900]?.withAlpha(200),
+            )];
+          },);
+        },
         child: const Icon(FontAwesomeIcons.plus),
       ),
     );

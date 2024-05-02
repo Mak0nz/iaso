@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iaso/screens/pages/stats/create_daily_stats_modal_sheet.dart';
+import 'package:iaso/screens/pages/stats/stats_modal.dart';
 import 'package:iaso/services/stats/display_stats_page.dart';
 import 'package:iaso/widgets/appbar_widget.dart';
 
@@ -17,7 +17,7 @@ class _StatsPageState extends State<StatsPage> {
       extendBodyBehindAppBar: true,
       appBar: CustomAppBar(title: "Napi mérések"),
 
-      floatingActionButton: CreateDailyStatsModalSheet(),
+      floatingActionButton: StatsModal(),
 
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10),

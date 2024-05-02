@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iaso/services/med/edit_med_modal.dart';
+import 'package:iaso/screens/pages/meds/edit_med_modal.dart';
 import 'package:iaso/widgets/card_widget.dart';
 
 class DisplayMeds extends StatefulWidget {

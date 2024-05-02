@@ -4,7 +4,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iaso/screens/pages/home.dart';
-import 'package:iaso/screens/pages/info.dart';
+import 'package:iaso/screens/pages/settings.dart';
 import 'package:iaso/screens/pages/meds/meds.dart';
 import 'package:iaso/screens/pages/stats/stats.dart';
 
@@ -21,7 +21,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
     Home(),
     StatsPage(),
     MedsPage(),
-    InfoPage(),
+    SettingsPage()
   ];
 
   @override
@@ -66,7 +66,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
                 NavigationDestination(icon: Icon(FontAwesomeIcons.house), label: 'főoldal'),
                 NavigationDestination(icon: Icon(FontAwesomeIcons.heartCirclePlus), label: 'mérések'),
                 NavigationDestination(icon: Icon(FontAwesomeIcons.capsules), label: 'gyógyszer'),
-                NavigationDestination(icon: Icon(FontAwesomeIcons.circleInfo), label: 'infó'),
+                NavigationDestination(icon: Icon(FontAwesomeIcons.gear), label: 'beállítások'),
               ],
             ),
           ),
