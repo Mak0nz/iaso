@@ -1,11 +1,13 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print, no_leading_underscores_for_local_identifiers, prefer_final_fields
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iaso/screens/auth/sign_up.dart';
 import 'package:iaso/screens/pages/onboarding/create_username.dart';
+import 'package:iaso/screens/pages/onboarding/enable_notifications.dart';
 import 'package:iaso/services/firebase_auth.dart';
 import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/form_container_widget.dart';
@@ -202,8 +204,15 @@ class _LoginPageState extends State<LoginPage> {
         } 
 
         if (hasUsername = true) {
-          // if username exists push to navigationMenu
-          Navigator.pushNamed(context, "/navigationMenu");
+          // if username exists push to navigationMenu or to enable notifications.
+          AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+            if (!isAllowed) {
+              // if notification isnt allowed push to enable it
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => EnableNotifications()), (route) => false);
+            } else { // go to logged in page if notification is enabled
+              Navigator.pushNamed(context, "/navigationMenu");
+            }
+          });
         } else {
           // if username doesn't exist push to create one.
           return const CreateUsername();
