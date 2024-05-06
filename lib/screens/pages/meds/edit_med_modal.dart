@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/checkbox_widget.dart';
 import 'package:iaso/widgets/input_med_form_widget.dart';
+import 'package:iaso/widgets/outlined_button_widget.dart';
 import 'package:iaso/widgets/toast.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
@@ -214,6 +217,13 @@ class _EditMedModalState extends State<EditMedModal> {
                   text: "Gyógyszer mentése", 
                   progressEvent: _isSaving,
                 ),
+                SizedBox(height: 15,),
+                CustomOutlinedButton(
+                  onTap: () => showConfirmationDialog(), 
+                  text: "Gyógyszer törlése", 
+                  progressEvent: _isSaving, 
+                  outlineColor: Colors.red,
+                ),
                 
               ],
             ),
@@ -267,8 +277,46 @@ class _EditMedModalState extends State<EditMedModal> {
       _isSaving = false;  
     });
     showToast(message: "Elmentve");
-    // ignore: use_build_context_synchronously
     Navigator.pop(context); // close modal
+  }
+
+  Future deleteMed() async {
+    final user = FirebaseAuth.instance.currentUser;
+    final docRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user?.email)
+        .collection('MedsForUser')
+        .doc(widget.medication);
+
+    await docRef.delete();
+
+    showToast(message: "Törölve");
+    Navigator.pop(context); // Close modal
+  }
+
+  void showConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Törlés megerősítése"),
+          content: const Text("Biztosan törölni szeretné a gyógyszert?"),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Mégsem"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                deleteMed();
+              },
+              child: const Text("Törlés", style: TextStyle(color: Colors.red),),
+            ),
+          ],
+        );
+      },
+    );
   }
 
 }
