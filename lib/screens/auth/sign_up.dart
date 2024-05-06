@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iaso/screens/auth/log_in.dart';
+import 'package:iaso/screens/pages/onboarding/enable_notifications.dart';
 import 'package:iaso/services/firebase_auth.dart';
 import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/form_container_widget.dart';
@@ -99,7 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       onTap: () {
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
                       },
-                      child: Text("Bejelentkezés",style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                      child: Text("Bejelentkezés",style: TextStyle(color: Colors.blue.shade400, fontWeight: FontWeight.bold)),
                     ),
                   ]),
               ],
@@ -136,7 +137,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     if (user != null) {
       showToast(message: "A felhasználó létrehozása sikeresen megtörtént");
-      Navigator.pushNamed(context, "/navigationMenu");
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => EnableNotifications()), (route) => false);
     } else {
       showToast(message: "Hiba történt.");
     }

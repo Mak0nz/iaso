@@ -1,9 +1,11 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print, no_leading_underscores_for_local_identifiers, prefer_final_fields
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iaso/screens/auth/sign_up.dart';
+import 'package:iaso/screens/pages/onboarding/create_username.dart';
 import 'package:iaso/services/firebase_auth.dart';
 import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/form_container_widget.dart';
@@ -129,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () {
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => SignUpPage()), (route) => false);
                       },
-                      child: Text("Regisztrálj",style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                      child: Text("Regisztrálj",style: TextStyle(color: Colors.blue.shade400, fontWeight: FontWeight.bold)),
                     ),
                   ]),
               ],
@@ -179,7 +181,34 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        Navigator.pushNamed(context, "/navigationMenu");
+        // check if user has a username or not:
+          // check if user has a username return false if they don't
+        final user = FirebaseAuth.instance.currentUser;
+        // ignore: unused_local_variable
+        final bool hasUsername;
+        if (user != null) {
+          // Get the document where email matches current user's email
+          final docRef = await FirebaseFirestore.instance
+              .collection("users")
+              .where("email", isEqualTo: user.email)
+              .get()
+              .then((snapshot) => snapshot.docs.first);
+
+          if (docRef.exists) {
+            return hasUsername = false;
+          } else {
+            return hasUsername = true;
+          }
+        } 
+
+        if (hasUsername = true) {
+          // if username exists push to navigationMenu
+          Navigator.pushNamed(context, "/navigationMenu");
+        } else {
+          // if username doesn't exist push to create one.
+          return const CreateUsername();
+        }
+        
       }
 
     } catch (e) {
