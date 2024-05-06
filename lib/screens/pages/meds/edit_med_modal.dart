@@ -299,7 +299,15 @@ class _EditMedModalState extends State<EditMedModal> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Törlés megerősítése"),
+          title: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 12),
+                child: const Icon(FontAwesomeIcons.trashCan, size: 44,),
+              ),
+              const Expanded(child:Text("Törlés megerősítése"),),
+            ],
+          ),
           content: const Text("Biztosan törölni szeretné a gyógyszert?"),
           actions: [
             TextButton(
