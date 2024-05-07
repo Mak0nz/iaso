@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iaso/services/med/display_meds.dart';
 import 'package:iaso/widgets/appbar_widget.dart';
-import 'package:iaso/widgets/toast.dart';
+//import 'package:iaso/widgets/toast.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -63,12 +63,12 @@ class _HomeState extends State<Home> {
         leading: CircleAvatar(
             backgroundImage: imageProvider,
         ),
-        actions: Icon(FontAwesomeIcons.rightFromBracket,),
+      /*actions: Icon(FontAwesomeIcons.rightFromBracket,),
         actionsEvent: () {
           FirebaseAuth.instance.signOut();
           Navigator.pushNamed(context, "/login");
           showToast(message: "Sikeresen kijelentkezve");
-        },
+        }, */
       ),
 
       body: Padding(
