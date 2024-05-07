@@ -25,7 +25,7 @@ class _CustomOutlinedButtonState extends State<CustomOutlinedButton> {
     return OutlinedButton(
       onPressed: widget.onTap,
       style: OutlinedButton.styleFrom(
-        minimumSize: Size.fromHeight(60),
+        minimumSize: Size.fromHeight(55),
         side: BorderSide(width: 3, color: widget.outlineColor,), 
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
