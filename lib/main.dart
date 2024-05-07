@@ -46,7 +46,6 @@ Future main() async {
         channelKey: 'gyogyszer_ertesitesek',
         channelName: 'Gyógyszer értesítések', 
         channelDescription: 'Fogyó gyógyszer értesítési csatorna',
-        channelShowBadge: true,
       )
     ],
     debug: false,
