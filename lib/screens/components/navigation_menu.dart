@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iaso/screens/pages/home.dart';
-import 'package:iaso/screens/pages/settings.dart';
+import 'package:iaso/screens/pages/settings/settings.dart';
 import 'package:iaso/screens/pages/meds/meds.dart';
 import 'package:iaso/screens/pages/stats/stats.dart';
 
@@ -51,6 +51,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
             child: NavigationBar(
               //backgroundColor: Colors.transparent,
               selectedIndex: currentIndex,
+              labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
               onDestinationSelected: (index) {
                 setState(() {
                   currentIndex = index;
