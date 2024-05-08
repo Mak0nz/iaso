@@ -17,7 +17,7 @@ class _ChangeLanguageModalState extends State<ChangeLanguageModal> {
         WoltModalSheet.show(context: context, pageListBuilder: (context) {
           return [ WoltModalSheetPage(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 35),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 65),
               child: Column(
                 children: [
                   

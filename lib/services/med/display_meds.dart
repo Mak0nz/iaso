@@ -46,7 +46,7 @@ class _DisplayMedsState extends State<DisplayMeds> {
         if (widget.showAll) {
           query = medsCollectionRef.orderBy('name');
         } else {
-          query = medsCollectionRef.where('totalDoses', isLessThan: 14)
+          query = medsCollectionRef.where('totalDoses', isLessThanOrEqualTo: 14)
             .orderBy('totalDoses');
         }
 

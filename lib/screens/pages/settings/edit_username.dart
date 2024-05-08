@@ -53,8 +53,9 @@ class _EditUsernameModalState extends State<EditUsernameModal> {
       onTap: () {
         WoltModalSheet.show(context: context, pageListBuilder: (context) {
           return [ WoltModalSheetPage(
+            isTopBarLayerAlwaysVisible: false,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 35),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 65),
               child: Column(
                 children: [
                   Text("Felhasználónév módosítása:", style: TextStyle(
@@ -62,12 +63,12 @@ class _EditUsernameModalState extends State<EditUsernameModal> {
                     fontSize: 24,
                   ),),
                   
-                  SizedBox(height: 5,),
+                  SizedBox(height: 25,),
 
                   FormContainerWidget(
-                  controller: _usernameController,
-                  hintText: "",
-                  isPasswordField: false,
+                    controller: _usernameController,
+                    hintText: "",
+                    isPasswordField: false,
                   ),
 
                   SizedBox(height: 15,),
