@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print, no_leading_underscores_for_local_identifiers, prefer_final_fields
 
+import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iaso/screens/auth/sign_up.dart';
 import 'package:iaso/screens/components/navigation_menu.dart';
 import 'package:iaso/screens/pages/onboarding/create_username.dart';
+import 'package:iaso/screens/pages/settings/reset_password.dart';
 import 'package:iaso/services/firebase_auth.dart';
 import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/form_container_widget.dart';
@@ -63,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                   letterSpacing: 4,
                   fontFamily: 'LilitaOne',
                 ),),
-                SizedBox(height: 45,),
+                SizedBox(height: 25,),
               // Email form
                 FormContainerWidget(
                   controller: _emailController,
@@ -76,6 +78,14 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _passwordController,
                   hintText: "jelszó",
                   isPasswordField: true,
+                ),
+                SizedBox(height: 10,),
+              // Reset password
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ResetPasswordModal(),
+                  ],
                 ),
                 SizedBox(height: 15,),
               // Login button
@@ -159,10 +169,18 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     if (user != null) {
-      showToast(message: "A felhasználó sikeresen bejelentkezve");
+      CherryToast.success(
+        title: Text("A felhasználó sikeresen bejelentkezve",
+          style: TextStyle(color: Colors.black),
+        ),
+      ).show(context);
       Navigator.pushNamed(context, "/navigationMenu");
     } else {
-      showToast(message: "Hiba történt.");
+      CherryToast.error(
+        title: Text("Hiba történt.",
+          style: TextStyle(color: Colors.black),
+        ),
+      ).show(context);
     }
   }
 

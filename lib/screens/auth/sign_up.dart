@@ -62,7 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   letterSpacing: 4,
                   fontFamily: 'LilitaOne',
                 ),),
-                SizedBox(height: 45,),
+                SizedBox(height: 25,),
               // username field
                 FormContainerWidget(
                   controller: _usernameController,
