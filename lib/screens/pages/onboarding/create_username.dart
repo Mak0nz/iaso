@@ -1,5 +1,6 @@
 // ignore_for_file: unused_field, prefer_final_fields
 
+import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:iaso/screens/pages/onboarding/enable_notifications.dart';
 import 'package:iaso/services/firebase_auth.dart';
 import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/form_container_widget.dart';
-import 'package:iaso/widgets/toast.dart';
 
 class CreateUsername extends StatefulWidget {
   const CreateUsername({super.key});
@@ -113,7 +113,12 @@ class _CreateUsernameState extends State<CreateUsername> {
     setState(() {
       _isCreatingUsername = false;
     });
-    showToast(message: "A felhasználónév sikeresen elmentve");
+
+    CherryToast.success(
+      title: Text("A felhasználónév sikeresen elmentve",
+        style: TextStyle(color: Colors.black),
+      ),
+    ).show(context);
   }
 
 }

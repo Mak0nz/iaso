@@ -12,7 +12,6 @@ import 'package:iaso/screens/pages/settings/reset_password.dart';
 import 'package:iaso/services/firebase_auth.dart';
 import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/form_container_widget.dart';
-import 'package:iaso/widgets/toast.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -230,7 +229,11 @@ class _LoginPageState extends State<LoginPage> {
       }
 
     } catch (e) {
-      showToast(message: "some error occured $e");
+      CherryToast.error(
+        title: Text("Hiba történt. $e",
+          style: TextStyle(color: Colors.black),
+        ),
+      ).show(context);
     }
   }
 

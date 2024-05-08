@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/checkbox_widget.dart';
 import 'package:iaso/widgets/input_med_form_widget.dart';
 import 'package:iaso/widgets/outlined_button_widget.dart';
-import 'package:iaso/widgets/toast.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 class EditMedModal extends StatefulWidget {
@@ -276,7 +276,13 @@ class _EditMedModalState extends State<EditMedModal> {
     setState(() {
       _isSaving = false;  
     });
-    showToast(message: "Elmentve");
+
+    CherryToast.success(
+      title: Text("Elmentve",
+        style: TextStyle(color: Colors.black),
+      ),
+    ).show(context);
+
     Navigator.pop(context); // close modal
   }
 
@@ -290,7 +296,12 @@ class _EditMedModalState extends State<EditMedModal> {
 
     await docRef.delete();
 
-    showToast(message: "Törölve");
+    CherryToast.success(
+      title: Text("Törölve",
+        style: TextStyle(color: Colors.black),
+      ),
+    ).show(context);
+
     Navigator.pop(context); // Close modal
   }
 

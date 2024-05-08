@@ -1,24 +1,44 @@
+// ignore_for_file: use_build_context_synchronously, prefer_final_fields, recursive_getters
+
+import 'package:cherry_toast/cherry_toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:iaso/widgets/toast.dart';
+import 'package:flutter/material.dart';
 
 class FirebaseAuthService{
 
-  // ignore: prefer_final_fields
   FirebaseAuth _auth = FirebaseAuth.instance;
+  
+  BuildContext get context => context;
 
-  Future<User?> signUpWithEmailAndPassword(String email, String password) async {
+  Future<User?> signUpWithEmailAndPassword(String email, String password,) async {
     try {
       UserCredential credential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       return credential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
-        showToast(message: 'Az e-mail cím már használatban van.');
+        CherryToast.error(
+          title: Text("Az e-mail cím már használatban van.",
+            style: TextStyle(color: Colors.black),
+          ),
+        ).show(context);
       } else if (e.code == 'channel-error') {
-        showToast(message: 'Minden mező szükséges.');
+        CherryToast.error(
+          title: Text("Minden mező szükséges.",
+            style: TextStyle(color: Colors.black),
+          ),
+        ).show(context);
       } else if (e.code == 'weak-password') {
-        showToast(message: 'Gyenge jelszó.');
+        CherryToast.error(
+          title: Text("Gyenge jelszó.",
+            style: TextStyle(color: Colors.black),
+          ),
+        ).show(context);
       } else {
-        showToast(message: 'Hiba lépett fel: ${e.code}');
+        CherryToast.error(
+          title: Text("Hiba lépett fel: ${e.code}",
+            style: TextStyle(color: Colors.black),
+          ),
+        ).show(context);
       }
     }
     return null;
@@ -30,11 +50,23 @@ class FirebaseAuthService{
       return credential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-credential') {
-        showToast(message: 'Rossz email cím vagy jelszó.');
+        CherryToast.error(
+          title: Text("Rossz email cím vagy jelszó.",
+            style: TextStyle(color: Colors.black),
+          ),
+        ).show(context);
       } else if (e.code == 'channel-error') {
-        showToast(message: 'Minden mező szükséges.');
+        CherryToast.error(
+          title: Text("Minden mező szükséges.",
+            style: TextStyle(color: Colors.black),
+          ),
+        ).show(context);
       } else {
-        showToast(message: 'Hiba lépett fel: ${e.code}');
+        CherryToast.error(
+          title: Text("Hiba lépett fel: ${e.code}",
+            style: TextStyle(color: Colors.black),
+          ),
+        ).show(context);
       }
     }
     return null;

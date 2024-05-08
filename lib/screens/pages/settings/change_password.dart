@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_final_fields, unused_field
 
+import 'package:cherry_toast/cherry_toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iaso/services/firebase_auth.dart';
 import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/form_container_widget.dart';
-import 'package:iaso/widgets/toast.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 class ChangePasswordModal extends StatefulWidget {
@@ -42,12 +42,23 @@ class _ChangePasswordModalState extends State<ChangePasswordModal> {
       setState(() {
         _isSaving = false;  
       });
-      showToast(message: "Jelszó sikeresen módosítva");
+      
+      CherryToast.success(
+        title: Text("Jelszó sikeresen módosítva",
+          style: TextStyle(color: Colors.black),
+        ),
+      ).show(context);
+
     }).catchError((error){
       setState(() {
         _isSaving = false;  
       });
-      showToast(message: error.toString());
+
+      CherryToast.error(
+        title: Text(error.toString(),
+          style: TextStyle(color: Colors.black),
+        ),
+      ).show(context);
     });
 
     // ignore: use_build_context_synchronously

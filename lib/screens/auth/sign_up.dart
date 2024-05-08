@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously, prefer_final_fields
 
+import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ import 'package:iaso/screens/pages/onboarding/enable_notifications.dart';
 import 'package:iaso/services/firebase_auth.dart';
 import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/form_container_widget.dart';
-import 'package:iaso/widgets/toast.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -136,10 +136,19 @@ class _SignUpPageState extends State<SignUpPage> {
     });
 
     if (user != null) {
-      showToast(message: "A felhasználó létrehozása sikeresen megtörtént");
+      CherryToast.success(
+        title: Text("A felhasználó létrehozása sikeresen megtörtént",
+          style: TextStyle(color: Colors.black),
+        ),
+      ).show(context);
+
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => EnableNotifications()), (route) => false);
     } else {
-      showToast(message: "Hiba történt.");
+      CherryToast.error(
+        title: Text("Hiba történt.",
+          style: TextStyle(color: Colors.black),
+        ),
+      ).show(context);
     }
   }
 

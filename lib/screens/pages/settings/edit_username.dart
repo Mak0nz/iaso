@@ -1,5 +1,6 @@
 // ignore_for_file: unused_field, prefer_final_fields, prefer_typing_uninitialized_variables
 
+import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iaso/services/firebase_auth.dart';
 import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/form_container_widget.dart';
-import 'package:iaso/widgets/toast.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 class EditUsernameModal extends StatefulWidget {
@@ -111,7 +111,13 @@ class _EditUsernameModalState extends State<EditUsernameModal> {
       _isSaving = false;  
     });
 
-    showToast(message: "Elmentve");
+    CherryToast.success(
+      title: Text("Elmentve",
+        style: TextStyle(color: Colors.black),
+      ),
+    // ignore: use_build_context_synchronously
+    ).show(context);
+    
     // ignore: use_build_context_synchronously
     Navigator.pop(context);
   }

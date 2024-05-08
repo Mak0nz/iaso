@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ import 'package:iaso/screens/pages/settings/tos.dart';
 import 'package:iaso/widgets/appbar_widget.dart';
 import 'package:iaso/widgets/outlined_button_widget.dart';
 import 'package:iaso/widgets/settings/setting_option_widget.dart';
-import 'package:iaso/widgets/toast.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -173,7 +173,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 onTap: () {
                   FirebaseAuth.instance.signOut();
                   Navigator.pushNamed(context, "/login");
-                  showToast(message: "Sikeresen kijelentkezve");
+                  CherryToast.success(
+                    title: Text("Sikeresen kijelentkezve",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ).show(context);
                 }, 
                 text: "Kijelentkezés", 
                 progressEvent: _isEvent, 
