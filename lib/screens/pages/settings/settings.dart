@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iaso/screens/pages/settings/change_language.dart';
 import 'package:iaso/screens/pages/settings/change_password.dart';
+import 'package:iaso/screens/pages/settings/delete_account.dart';
 import 'package:iaso/screens/pages/settings/edit_username.dart';
 import 'package:iaso/screens/pages/settings/tos.dart';
 import 'package:iaso/widgets/appbar_widget.dart';
@@ -186,12 +187,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 : Colors.grey,
               ),
               SizedBox(height: 10,),
-              CustomOutlinedButton(
-                onTap: () {}, 
-                text: "Fiók Törlése", 
-                progressEvent: _isEvent, 
-                outlineColor: Colors.red.shade400,
-              ),
+              DeleteAccount(),
 
               SizedBox(height: 105,),
             ],
