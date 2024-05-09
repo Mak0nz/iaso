@@ -72,7 +72,7 @@ class _HomeState extends State<Home> {
       ),
 
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 85, 10, 0), // No content behind appbar on pageload.
+        padding: const EdgeInsets.all(10), // No content behind appbar on pageload.
         child: Column(
           children: [
             DisplayMeds(showAll: false),
