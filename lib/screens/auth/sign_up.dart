@@ -93,7 +93,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: TextButton(
                         onPressed: () async {
                           launchUrl(
-                            Uri.parse(''),
+                            Uri.parse('https://github.com/Mak0nz/iaso/blob/0d185e427bbaad5d9c7449a3c82f6fc77e452bca/privacy.md'),
                             mode: LaunchMode.inAppBrowserView,
                           );
                         }, 
