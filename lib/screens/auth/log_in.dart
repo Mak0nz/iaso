@@ -6,8 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iaso/screens/auth/sign_up.dart';
-import 'package:iaso/screens/components/navigation_menu.dart';
-import 'package:iaso/screens/pages/onboarding/create_username.dart';
 import 'package:iaso/screens/pages/settings/reset_password.dart';
 import 'package:iaso/services/firebase_auth.dart';
 import 'package:iaso/widgets/animated_button_widget.dart';
@@ -168,12 +166,12 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     if (user != null) {
+      Navigator.pushNamed(context, "/navigationMenu");
       CherryToast.success(
         title: Text("A felhasználó sikeresen bejelentkezve",
           style: TextStyle(color: Colors.black),
         ),
       ).show(context);
-      Navigator.pushNamed(context, "/navigationMenu");
     } else {
       CherryToast.error(
         title: Text("Hiba történt.",
@@ -203,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
           // check if user has a username return false if they don't
         final user = FirebaseAuth.instance.currentUser;
         // ignore: unused_local_variable
-        final bool hasUsername;
+        bool hasUsername;
         if (user != null) {
           // Get the document where email matches current user's email
           final docRef = await FirebaseFirestore.instance
@@ -213,19 +211,24 @@ class _LoginPageState extends State<LoginPage> {
               .then((snapshot) => snapshot.docs.first);
 
           if (docRef.exists) {
-            return hasUsername = false;
+            hasUsername = false;
           } else {
-            return hasUsername = true;
+            hasUsername = true;
           }
-        } 
 
-        if (hasUsername = true) {
-          return const NavigationMenu();
-        } else {
-          // if username doesn't exist push to create one.
-          return const CreateUsername();
-        }
-        
+          if (hasUsername = true) {
+            Navigator.pushNamed(context, "/navigationMenu");
+          } else {
+            // if username doesn't exist push to create one.
+            return Navigator.pushNamed(context, "/createUsername");
+          }
+
+          return CherryToast.success(
+            title: Text("A felhasználó sikeresen bejelentkezve",
+              style: TextStyle(color: Colors.black),
+            ),
+          ).show(context);
+        } 
       }
 
     } catch (e) {

@@ -8,6 +8,7 @@ import 'package:iaso/screens/auth/log_in.dart';
 import 'package:iaso/screens/auth/sign_up.dart';
 import 'package:iaso/screens/components/navigation_menu.dart';
 import 'package:iaso/screens/pages/home.dart';
+import 'package:iaso/screens/pages/onboarding/create_username.dart';
 import 'package:iaso/screens/wrapper.dart';
 import 'package:iaso/themes.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -93,6 +94,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => Home(),
         '/login': (context) => LoginPage(),
         '/signup': (context) => SignUpPage(),
+        '/createUsername': (context) => CreateUsername(),
       }
     );
   }
