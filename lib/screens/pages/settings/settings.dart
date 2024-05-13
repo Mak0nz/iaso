@@ -10,10 +10,10 @@ import 'package:iaso/screens/pages/settings/change_language.dart';
 import 'package:iaso/screens/pages/settings/change_password.dart';
 import 'package:iaso/screens/pages/settings/delete_account.dart';
 import 'package:iaso/screens/pages/settings/edit_username.dart';
-import 'package:iaso/screens/pages/settings/tos.dart';
 import 'package:iaso/widgets/appbar_widget.dart';
 import 'package:iaso/widgets/outlined_button_widget.dart';
 import 'package:iaso/widgets/settings/setting_option_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -148,9 +148,25 @@ class _SettingsPageState extends State<SettingsPage> {
                 trailing: ChangeLanguageModal(),
               ),
 
-              SettingOption(
-                title: "Adatvédelem és biztonság",
-                trailing: TOS(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10, left: 6),
+                child: GestureDetector(
+                  onTap: () async {
+                    launchUrl(
+                      Uri.parse(''),
+                      mode: LaunchMode.inAppBrowserView,
+                    );
+                  }, 
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Adatvédelem és biztonság", style: TextStyle(
+                        fontSize: 20,
+                      ),),
+                      Icon(FontAwesomeIcons.chevronRight),
+                    ],
+                  ),
+                ),
               ),
 
               SettingOption(

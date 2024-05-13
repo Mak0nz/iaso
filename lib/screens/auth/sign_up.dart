@@ -6,10 +6,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iaso/screens/auth/log_in.dart';
 import 'package:iaso/screens/pages/onboarding/enable_notifications.dart';
-import 'package:iaso/screens/pages/settings/tos.dart';
 import 'package:iaso/services/firebase_auth.dart';
 import 'package:iaso/widgets/animated_button_widget.dart';
 import 'package:iaso/widgets/form_container_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -86,11 +86,20 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 SizedBox(height: 10,),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  //mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Checkbox(value: true, onChanged: (value) {},),
-                    Expanded(child: Text("Elolvastam és elfogadtam az adatvédelmi szabályzatot")),
-                    TOS(),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () async {
+                          launchUrl(
+                            Uri.parse(''),
+                            mode: LaunchMode.inAppBrowserView,
+                          );
+                        }, 
+                        child: Text("Elolvastam és elfogadtam az adatvédelmi szabályzatot"),
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(height: 15,),
