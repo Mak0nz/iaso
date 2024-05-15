@@ -6,7 +6,25 @@
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 
-**Short description in one sentence**  
+**Track vitals & meds! Reminders & secure. Manage health easily & clearly.**
+Take control of your health with Iaso!
+Easily track your vitals and medications all in one place.
+
+Here's what you can do:
+- Record your daily blood pressure, weight, and temperature.
+- View your previous vitals through a calendar to see trends over time.
+- Organize your medications with a simple list.
+- Automatic reminders and receive notifications when it's time to refill.
+
+Bonus features:
+- Secure and private data storage.
+- Easy-to-use interface.
+
+Iaso is perfect for:
+- Anyone who wants to monitor their vitals.
+- Individuals taking daily medications.
+
+Download Iaso today and take charge of your health!  
 
 # Table of Contents
 - [Iaso](#iaso)
