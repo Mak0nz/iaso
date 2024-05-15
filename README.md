@@ -1,12 +1,13 @@
-# Iaso
-
-[//]: # (Add other badges such as version, build bagdges here)
+<img align="left" width="100" height="100" src="https://github.com/Mak0nz/iaso/blob/main/assets/logo.png?raw=true">
 
 [//]: # (Use Apache License as the default option)
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
+<h1>Iaso</h1>
+<br></br>
 
 **Track vitals & meds! Reminders & secure. Manage health easily & clearly.**
+
 Take control of your health with Iaso!
 Easily track your vitals and medications all in one place.
 
